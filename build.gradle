@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.1.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'com.diffplug.spotless' version '8.2.1'
 }
 
 group = 'com.jonjam'
@@ -26,6 +27,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+spotless {
+	java {
+		googleJavaFormat()
+		importOrder()
+		removeUnusedImports()
+		forbidWildcardImports()
+	}
 }
 
 tasks.named('test') {
