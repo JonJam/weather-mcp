@@ -28,4 +28,3 @@ jobs:
 
       - name: Build with Gradle (tests included)
         run: ./gradlew build
-
