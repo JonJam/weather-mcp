@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '4.1.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'com.diffplug.spotless' version '8.2.1'
+	id 'checkstyle'
 	id 'jacoco'
 }
 
@@ -48,6 +49,13 @@ spotless {
 jacoco {
 	// Pin version to keep builds reproducible
 	toolVersion = '0.8.12'
+}
+
+checkstyle {
+	// Formatting and import layout are handled by Spotless (google-java-format).
+	// Checkstyle is focused on structural and documentation rules.
+	toolVersion = '10.18.0'
+	configFile = file('config/checkstyle/checkstyle.xml')
 }
 
 tasks.named('test') {
