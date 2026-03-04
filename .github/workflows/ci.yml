@@ -29,6 +29,13 @@ jobs:
       - name: Build with Gradle (tests included)
         run: ./gradlew build
 
+      - name: Archive built JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-jar
+          path: |
+            build/libs/*.jar
+
       - name: Archive Checkstyle report
         if: always()
         uses: actions/upload-artifact@v4
