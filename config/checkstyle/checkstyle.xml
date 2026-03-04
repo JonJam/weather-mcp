@@ -1,0 +1,79 @@
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<!--
+  Checkstyle configuration based on the Google Java Style Guide: 
+  https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml
+
+  This project already uses Spotless with google-java-format for all
+  formatting and import organization. To avoid conflicts and duplication:
+
+  - Formatting-related rules (indentation, spaces, line wraps, etc.)
+    are intentionally NOT included here.
+  - Import layout is also left to Spotless; we do not enforce it in
+    Checkstyle.
+
+  Checkstyle in this configuration focuses on:
+  - Naming conventions
+  - Javadoc and documentation requirements
+  - Basic structural rules (visibility, one top-level class, etc.)
+-->
+<module name="Checker">
+    <property name="severity" value="warning"/>
+    <property name="charset" value="UTF-8"/>
+    <property name="fileExtensions" value="java"/>
+
+    <!-- Require a newline at end of file; this is compatible with google-java-format. -->
+    <module name="NewlineAtEndOfFile"/>
+
+    <!-- Disallow tabs; google-java-format will always emit spaces. -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <module name="TreeWalker">
+        <!-- Import and wildcard usage: layout is handled by Spotless, but we still avoid stars. -->
+        <module name="AvoidStarImport"/>
+        <module name="AvoidStaticImport">
+            <property name="excludes" value="org.junit.Assert.*,org.assertj.core.api.Assertions.*"/>
+        </module>
+
+        <!-- Naming conventions consistent with Google style. -->
+        <module name="TypeName"/>
+        <module name="MethodName"/>
+        <module name="ParameterName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="ConstantName"/>
+        <module name="PackageName"/>
+
+        <!-- Javadoc requirements following Google style expectations. -->
+        <module name="JavadocType"/>
+        <module name="JavadocMethod"/>
+        <module name="JavadocVariable"/>
+
+        <!-- Class and member structure rules. -->
+        <module name="VisibilityModifier"/>
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="OneTopLevelClass"/>
+        <module name="FinalLocalVariable"/>
+        <module name="EqualsHashCode"/>
+        <module name="OverloadMethodsDeclarationOrder"/>
+        <module name="DeclarationOrder"/>
+
+        <!-- Miscellaneous style checks aligned with Google guidance. -->
+        <module name="EmptyCatchBlock">
+            <property name="exceptionVariableName" value="ignored|expected"/>
+        </module>
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="sun,com.sun"/>
+        </module>
+        <module name="IllegalThrows">
+            <property name="illegalClassNames" value="java.lang.Error,java.lang.RuntimeException"/>
+        </module>
+        <module name="InnerTypeLast"/>
+    </module>
+</module>
+

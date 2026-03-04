@@ -29,6 +29,14 @@ jobs:
       - name: Build with Gradle (tests included)
         run: ./gradlew build
 
+      - name: Archive Checkstyle report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-report
+          path: |
+            build/reports/checkstyle
+
       - name: Archive JUnit test results and reports
         if: always()
         uses: actions/upload-artifact@v4
