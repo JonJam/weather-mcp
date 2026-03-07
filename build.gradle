@@ -22,12 +22,21 @@ repositories {
 	maven { url = 'https://repo.spring.io/snapshot' }
 }
 
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.ai:spring-ai-bom:1.1.2'
+	}
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
+	implementation 'org.springframework.ai:spring-ai-mcp-annotations'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	// Lombok

@@ -70,3 +70,5 @@ Static analysis and broader code-quality checks are handled by Checkstyle using 
   ```
   Lombok generates a `private static final org.apache.commons.logging.Log log` field so you can log via `log.info(...)`, `log.warn(...)`, etc.
 
+## Documentation
+- Add [Spring AI documentation](https://docs.spring.io/spring-ai/reference/) as a Docs source to Cursor.
