@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  call-gradle-build-workflow:
     uses: ./.github/workflows/gradle-build.yml
     with:
       app-version: ${{ github.ref_name }}-SNAPSHOT
