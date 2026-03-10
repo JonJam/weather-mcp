@@ -22,5 +22,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Placeholder for Docker/MCP registry publishing
-        run: echo "TODO: Publish Docker image or MCP package for this release"
+        run: 'echo "TODO: Publish Docker image or MCP package for this release"'
 
