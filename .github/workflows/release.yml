@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  call-gradle-build-workflow:
+    uses: ./.github/workflows/gradle-build.yml
+    with:
+      app-version: ${{ github.event.release.tag_name || github.ref_name }}
+    secrets: inherit
+
+  publish:
+    needs: call-gradle-build-workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder for Docker/MCP registry publishing
+        run: 'echo "TODO: Publish Docker image or MCP package for this release"'
+

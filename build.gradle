@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.jonjam'
-version = '0.0.1-SNAPSHOT'
+version = System.getenv('APP_VERSION') ?: '0.0.1-snapshot'
 description = 'Weather MCP'
 
 java {
@@ -29,11 +29,13 @@ dependencyManagement {
 }
 
 dependencies {
+	// Spring AI
 	implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
 	implementation 'org.springframework.ai:spring-ai-mcp-annotations'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+	// Spring Boot Actuator
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
 	

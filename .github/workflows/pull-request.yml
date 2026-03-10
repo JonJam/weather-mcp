@@ -1,0 +1,16 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  call-gradle-build-workflow:
+    uses: ./.github/workflows/gradle-build.yml
+    with:
+      app-version: ${{ github.head_ref }}-SNAPSHOT
+    secrets: inherit
+

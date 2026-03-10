@@ -1,0 +1,37 @@
+name: Main
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  call-gradle-build-workflow:
+    uses: ./.github/workflows/gradle-build.yml
+    with:
+      app-version: ${{ github.ref_name }}-SNAPSHOT
+    secrets: inherit
+
+  release:
+    needs: call-gradle-build-workflow
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release@25

@@ -1,13 +1,12 @@
-name: CI
+name: Gradle Build
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-permissions:
-  contents: read
+  workflow_call:
+    inputs:
+      app-version:
+        description: 'Application version to use for APP_VERSION'
+        required: false
+        type: string
 
 jobs:
   build:
@@ -17,16 +16,20 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Set APP_VERSION env (if provided)
+        if: ${{ inputs.app-version != '' }}
+        run: echo "APP_VERSION=${{ inputs.app-version }}" >> "$GITHUB_ENV"
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '21'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
 
-      - name: Build with Gradle (tests included)
+      - name: Build with Gradle
         run: ./gradlew build
 
       - name: Archive built JAR
@@ -60,3 +63,4 @@ jobs:
           name: jacoco-coverage-report
           path: |
             build/reports/jacoco/test
+
