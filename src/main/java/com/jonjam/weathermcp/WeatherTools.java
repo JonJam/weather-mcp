@@ -4,6 +4,7 @@ import lombok.extern.apachecommons.CommonsLog;
 import org.springaicommunity.mcp.annotation.McpTool;
 import org.springframework.stereotype.Component;
 
+// TODO Remove
 @Component
 @CommonsLog
 public class WeatherTools {

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springaicommunity.mcp.annotation.McpComplete;
 import org.springframework.stereotype.Component;
 
+// TODO Review
 @Component
 @RequiredArgsConstructor
 public class LocationsAutocompleteProvider {

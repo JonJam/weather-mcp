@@ -33,11 +33,8 @@ dependencies {
 	implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
 	implementation 'org.springframework.ai:spring-ai-mcp-annotations'
 
-	// HTTP client
+	// Sprintg Boot HTTP client
 	implementation 'org.springframework.boot:spring-boot-starter-restclient'
-
-	// Spring Web (HTTP service interfaces)
-	implementation 'org.springframework:spring-web'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -47,9 +44,10 @@ dependencies {
 
 	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.wiremock.integrations:wiremock-spring-boot:4.0.9'
-
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	// WireMock
+	testImplementation 'org.wiremock.integrations:wiremock-spring-boot'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'

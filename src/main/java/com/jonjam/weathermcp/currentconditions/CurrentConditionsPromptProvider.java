@@ -4,6 +4,7 @@ import org.springaicommunity.mcp.annotation.McpArg;
 import org.springaicommunity.mcp.annotation.McpPrompt;
 import org.springframework.stereotype.Component;
 
+// TODO Review
 @Component
 public class CurrentConditionsPromptProvider {
 

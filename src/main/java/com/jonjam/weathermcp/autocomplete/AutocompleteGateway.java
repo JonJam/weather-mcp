@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+// TODO Review
 @Component
 @RequiredArgsConstructor
 public class AutocompleteGateway {
 
   private static final String DEFAULT_LANGUAGE = "en-us";
 
-  private final AccuWeatherAutocompleteClient client;
+  private final AccuWeatherLocationsAutocompleteClient client;
 
   public List<String> autocompleteForCitiesAndPointsOfInterest(
       String partialName, String language) {

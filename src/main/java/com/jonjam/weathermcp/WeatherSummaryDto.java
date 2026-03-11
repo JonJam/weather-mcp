@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 
+// TOOD Remove
 @Value
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

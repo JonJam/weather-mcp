@@ -8,10 +8,10 @@ spring:
         version: ${APP_VERSION:0.0.1-SNAPSHOT}
         type: SYNC
         stdio: true
-  main:
-    banner-mode: off
+  http:
+    serviceclient:
+      accuweather:
+        base-url: https://dataservice.accuweather.com
+        api-key: "CHANGE_ME"
 
-app:
-  accuweather:
-    base-url: https://dataservice.accuweather.com
-    api-key: "CHANGE_ME"
+        # TODO sort out default headers of GZIP and authentication
