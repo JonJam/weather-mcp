@@ -10,3 +10,8 @@ spring:
         stdio: true
   main:
     banner-mode: off
+
+app:
+  accuweather:
+    base-url: https://dataservice.accuweather.com
+    api-key: "CHANGE_ME"

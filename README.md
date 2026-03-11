@@ -72,3 +72,4 @@ Static analysis and broader code-quality checks are handled by Checkstyle using 
 
 ## Documentation
 - Add [Spring AI documentation](https://docs.spring.io/spring-ai/reference/) as a Docs source to Cursor.
+- Add [Wiremock documentation][https://wiremock.org/docs/] as a Docs source to Cursor.

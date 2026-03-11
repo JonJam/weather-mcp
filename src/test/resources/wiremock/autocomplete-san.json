@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/locations/v1/autocomplete",
+    "queryParameters": {
+      "q": {
+        "equalTo": "san"
+      },
+      "language": {
+        "equalTo": "en-us"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "Key": "1",
+        "LocalizedName": "San Francisco",
+        "Type": "City"
+      }
+    ]
+  }
+}
+
