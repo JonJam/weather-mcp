@@ -23,6 +23,10 @@ Add rules below this line:
 
 - **Dependency versions**: When using Spring Boot with the `io.spring.dependency-management` plugin, do not specify versions on individual dependencies in the `dependencies {}` block. Rely on BOMs (for example, `spring-boot-dependencies` and technology-specific BOMs like `spring-ai-bom`) to control versions centrally, as recommended in the Spring Boot dependency management documentation.
 
+### Build tooling
+
+- **Gradle, not Maven**: This project uses Gradle as its build tool. Prefer Gradle commands (for example, `./gradlew test`) instead of Maven commands.
+
 ### Null handling
 
 - **Package defaults**: Each Java package in this project should declare a `package-info.java` file that applies `@NullMarked`:

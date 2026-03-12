@@ -4,7 +4,8 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import java.util.List;
@@ -15,11 +16,13 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.wiremock.spring.ConfigureWireMock;
 import org.wiremock.spring.EnableWireMock;
 import org.wiremock.spring.InjectWireMock;
 
 // TODO Refactor to demo happy path and error handling
+@ActiveProfiles("test")
 @SpringBootTest
 @EnableWireMock(
     @ConfigureWireMock(baseUrlProperties = "spring.http.serviceclient.accuweather.base-url"))
@@ -51,10 +54,23 @@ class LocationsAutocompleteGatewayIntegrationTest {
       final Locale locale = Locale.forLanguageTag("en-us");
 
       // Act
-      final List<String> result = gateway.autocompleteForCitiesAndPointsOfInterest("san", locale);
+      final List<LocationSuggestionDto> result =
+          gateway.autocompleteForCitiesAndPointsOfInterest("san", locale);
 
       // Assert
-      assertThat(result, contains("San Francisco"));
+      final List<String> localizedNames =
+          result.stream().map(LocationSuggestionDto::getLocalizedName).toList();
+
+      assertThat(localizedNames.size(), is(10));
+      assertThat(
+          localizedNames,
+          hasItems(
+              "San Francisco Coacalco",
+              "San Francisco",
+              "San Francisco De Macoris",
+              "San Francisco Solano",
+              "San Francisco de Campeche",
+              "San Francisco del Rincón"));
     }
   }
 }

@@ -32,7 +32,14 @@ class LocationsAutocompleteProviderTest {
     void completesLocationUsingGateway() {
       // Arrange
       when(gateway.autocompleteForCitiesAndPointsOfInterest("san", Locale.US))
-          .thenReturn(List.of("San Francisco"));
+          .thenReturn(
+              List.of(
+                  LocationSuggestionDto.builder()
+                      .id("12345")
+                      .localizedName("San Francisco")
+                      .countryKey("US")
+                      .countryLocalizedName("United States")
+                      .build()));
 
       // Act
       final CompleteResult result = provider.completeLocation("san", Locale.US.toLanguageTag());
@@ -41,7 +48,7 @@ class LocationsAutocompleteProviderTest {
       final CompleteResult.CompleteCompletion completion = result.completion();
 
       assertThat(completion.hasMore(), is(false));
-      assertThat(completion.values(), is(List.of("San Francisco")));
+      assertThat(completion.values(), is(List.of("San Francisco, United States")));
     }
   }
 }

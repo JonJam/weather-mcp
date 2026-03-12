@@ -34,8 +34,17 @@ public class LocationsAutocompleteProvider {
             ? Locale.forLanguageTag(language)
             : Constants.DEFAULT_LANGUAGE;
 
-    final List<String> results =
+    final List<LocationSuggestionDto> suggestions =
         gateway.autocompleteForCitiesAndPointsOfInterest(partialLocation, resolvedLanguage);
+
+    final List<String> results =
+        suggestions.stream()
+            .map(
+                suggestion ->
+                    String.format(
+                        "%s, %s",
+                        suggestion.getLocalizedName(), suggestion.getCountryLocalizedName()))
+            .toList();
 
     return new CompleteResult(
         new CompleteResult.CompleteCompletion(results, results.size(), false));

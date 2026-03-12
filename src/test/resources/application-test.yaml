@@ -1,0 +1,10 @@
+spring:
+  ai:
+    mcp:
+      server:
+        version: test-SNAPSHOT
+  http:
+    serviceclient:
+      accuweather:
+        default-header:
+          Authorization: Bearer MY_TEST_API_KEY

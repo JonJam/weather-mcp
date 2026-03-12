@@ -10,19 +10,11 @@ import lombok.Value;
 @Value
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonDeserialize(
-    builder = AccuWeatherLocationsAutocompleteDto.AccuWeatherLocationsAutocompleteDtoBuilder.class)
-public class AccuWeatherLocationsAutocompleteDto {
-
-  @JsonProperty("Key")
-  String key;
+@JsonDeserialize(builder = AccuWeatherCountryDto.AccuWeatherCountryDtoBuilder.class)
+public class AccuWeatherCountryDto {
+  @JsonProperty("ID")
+  String id;
 
   @JsonProperty("LocalizedName")
   String localizedName;
-
-  @JsonProperty("Type")
-  String type;
-
-  @JsonProperty("Country")
-  AccuWeatherCountryDto country;
 }
