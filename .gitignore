@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Spring ###
+application-local.yaml
+application-local.yml
+
+### Mac ###
+.DS_Store

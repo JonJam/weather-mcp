@@ -6,7 +6,20 @@ spring:
       server:
         name: weathermcp
         version: ${APP_VERSION:0.0.1-SNAPSHOT}
+        instructions: "This server provides weather information."
         type: SYNC
         stdio: true
-  main:
-    banner-mode: off
+        tool-callback-converter: false
+        capabilities:
+          completion: true
+          resource: false
+          tool: false
+          prompt: true
+
+  http:
+    serviceclient:
+      accuweather:
+        base-url: https://dataservice.accuweather.com
+        default-header:
+          Accept-Encoding: gzip,deflate
+          Authorization: Bearer ${ACCUWEATHER_API_KEY}

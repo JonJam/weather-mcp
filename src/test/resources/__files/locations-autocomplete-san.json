@@ -1,0 +1,152 @@
+[
+  {
+    "Version": 1,
+    "Key": "234000",
+    "Type": "City",
+    "Rank": 35,
+    "LocalizedName": "San Francisco Coacalco",
+    "Country": {
+      "ID": "MX",
+      "LocalizedName": "Mexico"
+    },
+    "AdministrativeArea": {
+      "ID": "MEX",
+      "LocalizedName": "México"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "347629",
+    "Type": "City",
+    "Rank": 35,
+    "LocalizedName": "San Francisco",
+    "Country": {
+      "ID": "US",
+      "LocalizedName": "United States"
+    },
+    "AdministrativeArea": {
+      "ID": "CA",
+      "LocalizedName": "California"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "122459",
+    "Type": "City",
+    "Rank": 41,
+    "LocalizedName": "San Francisco De Macoris",
+    "Country": {
+      "ID": "DO",
+      "LocalizedName": "Dominican Republic"
+    },
+    "AdministrativeArea": {
+      "ID": "06",
+      "LocalizedName": "Duarte"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "7621",
+    "Type": "City",
+    "Rank": 45,
+    "LocalizedName": "San Francisco Solano",
+    "Country": {
+      "ID": "AR",
+      "LocalizedName": "Argentina"
+    },
+    "AdministrativeArea": {
+      "ID": "B",
+      "LocalizedName": "Buenos Aires"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "3564395",
+    "Type": "City",
+    "Rank": 45,
+    "LocalizedName": "San Francisco de Campeche",
+    "Country": {
+      "ID": "MX",
+      "LocalizedName": "Mexico"
+    },
+    "AdministrativeArea": {
+      "ID": "CAM",
+      "LocalizedName": "Campeche"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "232898",
+    "Type": "City",
+    "Rank": 45,
+    "LocalizedName": "San Francisco del Rincón",
+    "Country": {
+      "ID": "MX",
+      "LocalizedName": "Mexico"
+    },
+    "AdministrativeArea": {
+      "ID": "GUA",
+      "LocalizedName": "Guanajuato"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "3172",
+    "Type": "City",
+    "Rank": 55,
+    "LocalizedName": "San Francisco",
+    "Country": {
+      "ID": "AR",
+      "LocalizedName": "Argentina"
+    },
+    "AdministrativeArea": {
+      "ID": "X",
+      "LocalizedName": "Cordoba"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "113032",
+    "Type": "City",
+    "Rank": 55,
+    "LocalizedName": "San Francisco",
+    "Country": {
+      "ID": "CR",
+      "LocalizedName": "Costa Rica"
+    },
+    "AdministrativeArea": {
+      "ID": "H",
+      "LocalizedName": "Heredia"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "262723",
+    "Type": "City",
+    "Rank": 55,
+    "LocalizedName": "San Francisco",
+    "Country": {
+      "ID": "PH",
+      "LocalizedName": "Philippines"
+    },
+    "AdministrativeArea": {
+      "ID": "CEB",
+      "LocalizedName": "Cebu"
+    }
+  },
+  {
+    "Version": 1,
+    "Key": "265727",
+    "Type": "City",
+    "Rank": 55,
+    "LocalizedName": "San Francisco",
+    "Country": {
+      "ID": "PH",
+      "LocalizedName": "Philippines"
+    },
+    "AdministrativeArea": {
+      "ID": "QUE",
+      "LocalizedName": "Quezon"
+    }
+  }
+]

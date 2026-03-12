@@ -33,13 +33,21 @@ dependencies {
 	implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
 	implementation 'org.springframework.ai:spring-ai-mcp-annotations'
 
+	// Spring Boot HTTP client
+	implementation 'org.springframework.boot:spring-boot-starter-restclient'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	// Spring Boot Actuator
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
-	
+
+	// Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	// WireMock
+	testImplementation 'org.wiremock.integrations:wiremock-spring-boot:4.2.0'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
