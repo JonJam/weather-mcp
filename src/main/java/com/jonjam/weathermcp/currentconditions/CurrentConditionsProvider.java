@@ -2,6 +2,7 @@ package com.jonjam.weathermcp.currentconditions;
 
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
+import com.jonjam.weathermcp.locations.common.LocationValidationUtils;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
 import java.util.Locale;
 import org.springaicommunity.mcp.annotation.McpArg;
@@ -50,11 +51,19 @@ public class CurrentConditionsProvider {
               openWorldHint = true))
   public CallToolResult currentConditionsTool(
       @McpToolParam(description = "City or point of interest", required = true)
-          final String location) {
+          final String location,
+      final McpMeta meta) {
 
-    // TODO validate location parameter
-    // See
-    // [https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
+    final var normalizedLocationOptional =
+        LocationValidationUtils.normalizeAndValidateLocation(location);
+
+    if (normalizedLocationOptional.isEmpty()) {
+      return CallToolResult.builder()
+          .isError(true)
+          .addTextContent(
+              "The 'location' parameter must be between 3 and 100 characters of non-blank text.")
+          .build();
+    }
 
     // TODO call gateway to lookup location key
 
@@ -62,8 +71,11 @@ public class CurrentConditionsProvider {
 
     // TODO return current conditions
 
+    final String normalizedLocation = normalizedLocationOptional.orElseThrow();
+
     return CallToolResult.builder()
-        .addTextContent("Current conditions for " + location + " are not yet implemented.")
+        .addTextContent(
+            "Current conditions for " + normalizedLocation + " are not yet implemented.")
         .build();
   }
 }

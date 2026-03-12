@@ -37,6 +37,7 @@ This file defines how agents should work in this repository and where to find re
   public String greet(@Nullable String name) { ... }
   ```
 - **Non-null by default**: Under `@NullMarked`, all unannotated types are treated as non-null, so `@Nullable` is the only marker needed to indicate possible absence.
+- **Prefer `Optional` for absence in APIs**: For public APIs and reusable utilities, prefer returning `Optional<T>` over returning nullable values. Reserve `@Nullable` primarily for interoperability or where `Optional` would be impractical, while keeping null usage explicit and rare.
 
 ### DTOs
 

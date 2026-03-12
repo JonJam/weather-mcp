@@ -92,3 +92,7 @@ Static analysis and broader code-quality checks are handled by Checkstyle using 
 
 
 More information about patterns and practises for this project can be found in AGENTS.md.
+
+## MCP
+### Tools
+- Ensure to handle errors (i.e. validation) according to the [specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
