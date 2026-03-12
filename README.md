@@ -1,7 +1,15 @@
 # weather-mcp
 
 ## Setup
-- Define a `application-local.yaml` in `src/main/resources/application.yaml`
+- Define a `application-local.yaml` in `src/main/resources/application.yaml` with the following content:
+```YAML
+spring:
+  http:
+    serviceclient:
+      accuweather:
+        default-header:
+          Authorization: Bearer MY_API_KEY
+```
 
 ## Run
 - Run with `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
