@@ -6,8 +6,16 @@ spring:
       server:
         name: weathermcp
         version: ${APP_VERSION:0.0.1-SNAPSHOT}
+        instructions: "This server provides weather information."
         type: SYNC
         stdio: true
+        tool-callback-converter: false
+        capabilities:
+          completion: true
+          resource: false
+          tool: false
+          prompt: true
+
   http:
     serviceclient:
       accuweather:

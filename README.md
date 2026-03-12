@@ -6,6 +6,16 @@
 ## Run
 - Run with `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
 
+## Testing
+-c
+
+```
+SPRING_PROFILES_ACTIVE=local \
+npx @modelcontextprotocol/inspector \
+  -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005' \
+  java -jar /Users/jonjam/dev/weather-mcp/build/libs/weathermcp-0.0.1-snapshot.jar
+```
+
 ## Code style and static analysis
 
 ### Spotless
