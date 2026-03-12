@@ -2,7 +2,6 @@ package com.jonjam.weathermcp.currentconditions;
 
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
-
 import java.util.Locale;
 import org.springaicommunity.mcp.annotation.McpArg;
 import org.springaicommunity.mcp.annotation.McpMeta;

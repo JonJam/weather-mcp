@@ -2,9 +2,7 @@ package com.jonjam.weathermcp.locations.autocomplete;
 
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
-
 import io.modelcontextprotocol.spec.McpSchema.CompleteResult;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -25,8 +23,7 @@ public class LocationsAutocompleteProvider {
   public CompleteResult completeLocation(
       final @Nullable String partialLocation, final McpMeta meta) {
 
-    final String trimmedPartialLocation =
-        partialLocation != null ? partialLocation.trim() : null;
+    final String trimmedPartialLocation = partialLocation != null ? partialLocation.trim() : null;
 
     if (!StringUtils.hasText(trimmedPartialLocation)
         || trimmedPartialLocation.length() < 3

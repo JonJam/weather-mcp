@@ -1,5 +1,5 @@
 package com.jonjam.weathermcp;
 
 public class Prompts {
-    public final static String CURRENT_CONDITIONS_PROMPT = "current-conditions";
+  public static final String CURRENT_CONDITIONS_PROMPT = "current-conditions";
 }

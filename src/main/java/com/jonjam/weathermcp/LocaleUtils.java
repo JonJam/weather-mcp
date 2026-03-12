@@ -16,7 +16,7 @@ public final class LocaleUtils {
     Locale resolvedLanguage = DEFAULT_LOCALE;
 
     final @Nullable String metaLocale = (String) meta.get(LOCALE_KEY);
-    
+
     if (StringUtils.hasText(metaLocale)) {
       final Locale parsed = Locale.forLanguageTag(metaLocale);
       final String language = parsed.getLanguage();

@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 import io.modelcontextprotocol.spec.McpSchema.CompleteResult;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
