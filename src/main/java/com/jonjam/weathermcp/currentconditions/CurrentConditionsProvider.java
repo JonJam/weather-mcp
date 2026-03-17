@@ -3,8 +3,10 @@ package com.jonjam.weathermcp.currentconditions;
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
 import com.jonjam.weathermcp.locations.common.LocationValidationUtils;
+import com.jonjam.weathermcp.locations.textsearch.LocationsTextSearchGateway;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
 import java.util.Locale;
+import lombok.RequiredArgsConstructor;
 import org.springaicommunity.mcp.annotation.McpArg;
 import org.springaicommunity.mcp.annotation.McpMeta;
 import org.springaicommunity.mcp.annotation.McpPrompt;
@@ -14,7 +16,11 @@ import org.springframework.stereotype.Component;
 
 // TODO Review and improve this when built out tool
 @Component
+@RequiredArgsConstructor
 public class CurrentConditionsProvider {
+
+  private final LocationsTextSearchGateway locationsTextSearchGateway;
+  private final CurrentConditionsGateway currentConditionsGateway;
 
   // TODO tests
   @McpPrompt(
@@ -65,17 +71,45 @@ public class CurrentConditionsProvider {
           .build();
     }
 
-    // TODO call gateway to lookup location key
-
-    // TODO call gateway to get current conditions
-
-    // TODO return current conditions
-
     final String normalizedLocation = normalizedLocationOptional.orElseThrow();
 
-    return CallToolResult.builder()
-        .addTextContent(
-            "Current conditions for " + normalizedLocation + " are not yet implemented.")
-        .build();
+    final Locale resolvedLanguage = LocaleUtils.resolveLocale(meta);
+
+    final var locationSuggestionOptional =
+        locationsTextSearchGateway.search(normalizedLocation, resolvedLanguage);
+
+    if (locationSuggestionOptional.isEmpty()) {
+      return CallToolResult.builder()
+          .isError(true)
+          .addTextContent(
+              String.format("No locations were found matching '%s'.", normalizedLocation))
+          .build();
+    }
+
+    final var locationSuggestion = locationSuggestionOptional.orElseThrow();
+
+    final var currentConditionsOptional =
+        currentConditionsGateway.getCurrentConditions(locationSuggestion.getId(), resolvedLanguage);
+
+    if (currentConditionsOptional.isEmpty()) {
+      return CallToolResult.builder()
+          .isError(true)
+          .addTextContent(
+              String.format("Current conditions are not available for '%s'.", normalizedLocation))
+          .build();
+    }
+
+    final var currentConditions = currentConditionsOptional.orElseThrow();
+
+    final String response =
+        String.format(
+            "Current conditions for %s: %s. Temperature %d°C / %d°F. More details: %s",
+            normalizedLocation,
+            currentConditions.getWeatherText(),
+            currentConditions.getTemperatureMetric(),
+            currentConditions.getTemperatureImperial(),
+            currentConditions.getLink());
+
+    return CallToolResult.builder().addTextContent(response).build();
   }
 }
