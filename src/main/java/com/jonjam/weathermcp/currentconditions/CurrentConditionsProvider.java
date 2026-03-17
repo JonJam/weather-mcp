@@ -21,6 +21,7 @@ public class CurrentConditionsProvider {
 
   private final LocationsTextSearchGateway locationsTextSearchGateway;
   private final CurrentConditionsGateway currentConditionsGateway;
+  private final CurrentConditionsToolResultMapper currentConditionsToolResultMapper;
 
   // TODO tests
   @McpPrompt(
@@ -101,15 +102,12 @@ public class CurrentConditionsProvider {
 
     final var currentConditions = currentConditionsOptional.orElseThrow();
 
-    final String response =
-        String.format(
-            "Current conditions for %s: %s. Temperature %d°C / %d°F. More details: %s",
-            normalizedLocation,
-            currentConditions.getWeatherText(),
-            currentConditions.getTemperatureMetric(),
-            currentConditions.getTemperatureImperial(),
-            currentConditions.getLink());
+    final CurrentConditionsToolResult toolResult =
+        currentConditionsToolResultMapper.toToolResult(
+            locationSuggestion.getLocalizedName(),
+            locationSuggestion.getCountryLocalizedName(),
+            currentConditions);
 
-    return CallToolResult.builder().addTextContent(response).build();
+    return CallToolResult.builder().structuredContent(toolResult).build();
   }
 }

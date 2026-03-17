@@ -3,8 +3,6 @@ package com.jonjam.weathermcp.currentconditions;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.when;
 
 import com.jonjam.weathermcp.locations.common.LocationSuggestionDto;
@@ -31,6 +29,8 @@ class CurrentConditionsProviderTest {
   @Mock
   private com.jonjam.weathermcp.locations.textsearch.LocationsTextSearchGateway
       locationsTextSearchGateway;
+
+  @Mock private CurrentConditionsToolResultMapper currentConditionsToolResultMapper;
 
   @InjectMocks private CurrentConditionsProvider provider;
 
@@ -199,8 +199,23 @@ class CurrentConditionsProviderTest {
               .link("https://example.com/current-conditions")
               .build();
 
+      final CurrentConditionsToolResult toolResult =
+          CurrentConditionsToolResult.builder()
+              .locationLocalizedName("San Francisco")
+              .countryLocalizedName("United States")
+              .localObservationDateTime(currentConditions.getLocalObservationDateTime())
+              .weatherText(currentConditions.getWeatherText())
+              .temperatureMetric(currentConditions.getTemperatureMetric())
+              .temperatureImperial(currentConditions.getTemperatureImperial())
+              .link(currentConditions.getLink())
+              .build();
+
       when(currentConditionsGateway.getCurrentConditions("98765", Locale.US))
           .thenReturn(Optional.of(currentConditions));
+
+      when(currentConditionsToolResultMapper.toToolResult(
+              "San Francisco", "United States", currentConditions))
+          .thenReturn(toolResult);
 
       final var metadata = new HashMap<String, Object>();
       metadata.put("locale", Locale.US.toLanguageTag());
@@ -211,7 +226,7 @@ class CurrentConditionsProviderTest {
 
       // Assert
       assertThat(result.isError(), is(false));
-      assertThat(result.content(), is(not(nullValue())));
+      assertThat(result.structuredContent(), is(toolResult));
     }
   }
 }
