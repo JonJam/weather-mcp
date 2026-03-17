@@ -20,6 +20,7 @@ logging:
 - Run with `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
 
 ## Testing
+**Note**: If you enable the Java debugger, it will produce output to standard out which will trigger errors in the stdio MCP protocol.
 
 ### MCP Inspector
 
@@ -43,8 +44,7 @@ This was sourced from this [blog.](https://medium.com/@tsteidle/creating-an-mcp-
       "command": "PATH_TO_JAVA",
       "args": ["-jar", "ABSOLUTE_PATH_TO_REPO/build/libs/weathermcp-0.0.1-snapshot.jar"],
       "env": {
-        "ACCUWEATHER_API_KEY": "API_KEY",
-        "JAVA_TOOL_OPTIONS": "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+        "ACCUWEATHER_API_KEY": "API_KEY"
       }
     }
   }
