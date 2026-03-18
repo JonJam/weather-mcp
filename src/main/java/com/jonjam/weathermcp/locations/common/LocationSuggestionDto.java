@@ -1,4 +1,4 @@
-package com.jonjam.weathermcp.locations.autocomplete;
+package com.jonjam.weathermcp.locations.common;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

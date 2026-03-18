@@ -9,19 +9,20 @@ This file defines how agents should work in this repository and where to find re
 
 - **Skills directory**: Custom skills live in the `.agents/skills/` directory.
 
-### Java
+## Java
 
 - **Use final**: Prefer prefixing parameters and local variables with `final` where they are not reassigned, to make immutability explicit and avoid accidental reassignment.
+- **String formatting**: Prefer `String.format(...)` over string concatenation.
 
-### Spring Boot
+## Spring Boot
 
 - **Dependency versions**: When using Spring Boot with the `io.spring.dependency-management` plugin, do not specify versions on individual dependencies in the `dependencies {}` block. Rely on BOMs (for example, `spring-boot-dependencies` and technology-specific BOMs like `spring-ai-bom`) to control versions centrally, as recommended in the Spring Boot dependency management documentation.
 
-### Build tooling
+## Build tooling
 
 - **Gradle, not Maven**: This project uses Gradle as its build tool. Prefer Gradle commands (for example, `./gradlew test`) instead of Maven commands.
 
-### Null handling
+## Null handling
 
 - **Package defaults**: Each Java package in this project should declare a `package-info.java` file that applies `@NullMarked`:
   ```java
@@ -37,8 +38,9 @@ This file defines how agents should work in this repository and where to find re
   public String greet(@Nullable String name) { ... }
   ```
 - **Non-null by default**: Under `@NullMarked`, all unannotated types are treated as non-null, so `@Nullable` is the only marker needed to indicate possible absence.
+- **Prefer `Optional` for absence in APIs**: For public APIs and reusable utilities, prefer returning `Optional<T>` over returning nullable values. Reserve `@Nullable` primarily for interoperability or where `Optional` would be impractical, while keeping null usage explicit and rare.
 
-### DTOs
+## DTOs
 
 - **Immutable DTOs**: DTOs are modeled as immutable value types using Lombok's `@Value`, `@Builder` and `@AllArgsConstructor(access = AccessLevel.PRIVATE)`
 - Typical pattern:
@@ -59,7 +61,7 @@ This file defines how agents should work in this repository and where to find re
   ```
   Lombok generates a final class with private final fields, getters, and sensible `equals`, `hashCode`, and `toString` implementations. The constructor is private so callers must use `WeatherSummaryDto.builder()...build()`.
 
-### Tests
+## Tests
 - **Use Hamcrest assertions**: Prefer Hamcrest for test assertions so failure messages and intent stay clear and consistent.
   - Use `org.hamcrest.MatcherAssert.assertThat(actual, matcher)` (static import: `assertThat` from `org.hamcrest.MatcherAssert`).
   - Use matchers from `org.hamcrest.Matchers` (e.g. `is()`, `equalTo()`, `not()`, `nullValue()`, `hasItems()`, `contains()`, `hasSize()`, `allOf()`, `anyOf()`) rather than raw equality or AssertJ in the same tests.
@@ -68,6 +70,7 @@ This file defines how agents should work in this repository and where to find re
 - **Group tests by method**: Use JUnit 5 `@Nested` classes with `@DisplayName` to group test cases for a particular method; name the nested class after the method under test (e.g. `class AutocompleteForCitiesAndPointsOfInterest`).
 - **Arrange, Act, Assert**: Structure each test method with `// Arrange`, `// Act`, and `// Assert` comments to separate setup, invocation, and verification.
 
-### Wiremock
+## Wiremock
 - **WireMock usage**: When using WireMock in tests, prefer calling `stubFor` and other stubbing methods on the injected `WireMockServer` instance (e.g. a field annotated with `@InjectWireMock`) rather than using the static `WireMock.stubFor(...)` API, so that stubs are scoped to the configured server instance.
 - **WireMock response bodies**: Prefer using `.withBodyFile(...)` and JSON files under `src/test/resources/__files/` for stubbed HTTP responses instead of inline string bodies, so that payloads stay reusable and easy to maintain.
+

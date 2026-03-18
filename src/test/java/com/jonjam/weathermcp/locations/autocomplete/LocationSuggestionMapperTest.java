@@ -3,6 +3,8 @@ package com.jonjam.weathermcp.locations.autocomplete;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+import com.jonjam.weathermcp.locations.common.AccuWeatherCountryDto;
+import com.jonjam.weathermcp.locations.common.LocationSuggestionDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

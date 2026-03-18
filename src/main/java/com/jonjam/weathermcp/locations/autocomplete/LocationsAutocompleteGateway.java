@@ -1,5 +1,6 @@
 package com.jonjam.weathermcp.locations.autocomplete;
 
+import com.jonjam.weathermcp.locations.common.LocationSuggestionDto;
 import java.util.List;
 import java.util.Locale;
 import lombok.RequiredArgsConstructor;

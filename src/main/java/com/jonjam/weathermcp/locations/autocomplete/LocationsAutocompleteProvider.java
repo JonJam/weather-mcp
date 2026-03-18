@@ -2,6 +2,8 @@ package com.jonjam.weathermcp.locations.autocomplete;
 
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
+import com.jonjam.weathermcp.locations.common.LocationSuggestionDto;
+import com.jonjam.weathermcp.locations.common.LocationValidationUtils;
 import io.modelcontextprotocol.spec.McpSchema.CompleteResult;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,6 @@ import org.jspecify.annotations.Nullable;
 import org.springaicommunity.mcp.annotation.McpComplete;
 import org.springaicommunity.mcp.annotation.McpMeta;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 @Component
 @RequiredArgsConstructor
@@ -23,19 +24,20 @@ public class LocationsAutocompleteProvider {
   public CompleteResult completeLocation(
       final @Nullable String partialLocation, final McpMeta meta) {
 
-    final String trimmedPartialLocation = partialLocation != null ? partialLocation.trim() : null;
+    final var normalizedLocationOptional =
+        LocationValidationUtils.normalizeAndValidateLocation(partialLocation);
 
-    if (!StringUtils.hasText(trimmedPartialLocation)
-        || trimmedPartialLocation.length() < 3
-        || trimmedPartialLocation.length() > 100) {
+    if (normalizedLocationOptional.isEmpty()) {
       return new CompleteResult(
           new CompleteResult.CompleteCompletion(Collections.emptyList(), 0, false));
     }
 
+    final String normalizedLocation = normalizedLocationOptional.orElseThrow();
+
     final Locale resolvedLanguage = LocaleUtils.resolveLocale(meta);
 
     final List<LocationSuggestionDto> suggestions =
-        gateway.autocompleteForCitiesAndPointsOfInterest(trimmedPartialLocation, resolvedLanguage);
+        gateway.autocompleteForCitiesAndPointsOfInterest(normalizedLocation, resolvedLanguage);
 
     final List<String> results =
         suggestions.stream()

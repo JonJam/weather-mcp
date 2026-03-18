@@ -1,27 +1,63 @@
 # weather-mcp
 
 ## Setup
+
+```
+export ACCUWEATHER_API_KEY=replace-with-your-api-key
+```
+
+- Define the following environment variables in your system
 - Define a `application-local.yaml` in `src/main/resources/application.yaml` with the following content:
+
 ```YAML
-spring:
-  http:
-    serviceclient:
-      accuweather:
-        default-header:
-          Authorization: Bearer MY_API_KEY
+logging:
+  console:
+    enabled: true
 ```
 
 ## Run
+
 - Run with `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
 
 ## Testing
-- To test with MCP Inspector, use the following command:
+**Note**: If you enable the Java debugger, it will produce output to standard out which will trigger errors in the stdio MCP protocol.
+
+### MCP Inspector
+
+To test with [MCP Inspector]([https://modelcontextprotocol.io/docs/tools/inspector](https://modelcontextprotocol.io/docs/tools/inspector)), run the following from the root of the repo:
 
 ```bash
-SPRING_PROFILES_ACTIVE=local \
-npx @modelcontextprotocol/inspector \
-  -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005' \
-  java -jar /Users/jonjam/dev/weather-mcp/build/libs/weathermcp-0.0.1-snapshot.jar
+npx @modelcontextprotocol/inspector   -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'   java -jar "build/libs/weathermcp-0.0.1-snapshot.jar"
+````
+
+This was sourced from this [blog.](https://medium.com/@tsteidle/creating-an-mcp-server-with-spring-boot-setup-debugging-and-unit-testing-8edbac9da5a6)
+
+### AI chat (Claude, Cursor)
+
+1. Add this configuration to the MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "weather-mcp": {
+      "command": "PATH_TO_JAVA",
+      "args": ["-jar", "ABSOLUTE_PATH_TO_REPO/build/libs/weathermcp-0.0.1-snapshot.jar"],
+      "env": {
+        "ACCUWEATHER_API_KEY": "API_KEY"
+      }
+    }
+  }
+}
+```
+
+If you are using SDKMAN, `command` should be `~/.sdkman/candidates/java/current/bin/java`
+
+This was sourced from the [MCP docs](https://modelcontextprotocol.io/docs/develop/build-server#testing-your-server-with-claude-for-desktop-3).
+
+Example user prompt:
+
+```
+Use the weather-mcp to look up the current weather in Manchester, UK.
 ```
 
 ## Code style and static analysis
@@ -57,9 +93,16 @@ Static analysis and broader code-quality checks are handled by Checkstyle using 
   Lombok generates a `private static final org.apache.commons.logging.Log log` field so you can log via `log.info(...)`, `log.warn(...)`, etc.
 
 ## Documentation
-- Add [Spring AI documentation](https://docs.spring.io/spring-ai/reference/) as a Docs source to Cursor.
-- Add [Wiremock documentation][https://wiremock.org/docs/] as a Docs source to Cursor.
-- Add [Lombok documentation][https://projectlombok.org/features/] as a Docs source to Cursor.
 
+- Add [Spring AI documentation](https://docs.spring.io/spring-ai/reference/) as a Docs source to Cursor.
+- Add [Wiremock documentation][[https://wiremock.org/docs/]](https://wiremock.org/docs/]) as a Docs source to Cursor.
+- Add [Lombok documentation][[https://projectlombok.org/features/]](https://projectlombok.org/features/]) as a Docs source to Cursor.
 
 More information about patterns and practises for this project can be found in AGENTS.md.
+
+## MCP
+
+### Tools
+
+- Ensure to handle errors (i.e. validation) according to the [specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
+

@@ -1,13 +1,13 @@
-package com.jonjam.weathermcp.locations.autocomplete;
+package com.jonjam.weathermcp.locations.textsearch;
 
 import com.jonjam.weathermcp.locations.common.LocationSuggestionDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocationSuggestionMapper {
+public class LocationTextSearchMapper {
 
   public LocationSuggestionDto toLocationSuggestionDto(
-      final AccuWeatherLocationsAutocompleteDto accuWeatherDto) {
+      final AccuWeatherLocationSearchResultDto accuWeatherDto) {
     return LocationSuggestionDto.builder()
         .id(accuWeatherDto.getKey())
         .localizedName(accuWeatherDto.getLocalizedName())

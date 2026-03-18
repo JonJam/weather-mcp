@@ -1,0 +1,25 @@
+[
+  {
+    "LocalObservationDateTime": "2026-03-12T17:47:00+00:00",
+    "EpochTime": 1773337620,
+    "WeatherText": "Rain",
+    "WeatherIcon": 18,
+    "HasPrecipitation": true,
+    "PrecipitationType": "Rain",
+    "IsDayTime": true,
+    "Temperature": {
+      "Metric": {
+        "Value": 12,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "Imperial": {
+        "Value": 54,
+        "Unit": "F",
+        "UnitType": 18
+      }
+    },
+    "MobileLink": "https://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us",
+    "Link": "https://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us"
+  }
+]

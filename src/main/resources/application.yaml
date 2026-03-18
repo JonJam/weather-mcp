@@ -1,6 +1,16 @@
+logging:
+  console:
+    # For a MCP stdio server, we don't want to log to the console, See https://modelcontextprotocol.io/docs/develop/build-server#logging-in-mcp-servers-3
+    enabled: false
+  file:
+    name: mcp-weather-stdio-server.log
+    
 spring:
   application:
     name: weathermcp
+  main:
+    # For a MCP stdio server, we don't want to log to the console, See https://modelcontextprotocol.io/docs/develop/build-server#logging-in-mcp-servers-3
+    banner-mode: off
   ai:
     mcp:
       server:
@@ -13,7 +23,7 @@ spring:
         capabilities:
           completion: true
           resource: false
-          tool: false
+          tool: true
           prompt: true
 
   http:

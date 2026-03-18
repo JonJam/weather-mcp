@@ -1,4 +1,4 @@
-package com.jonjam.weathermcp.locations.autocomplete;
+package com.jonjam.weathermcp.locations.textsearch;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -12,17 +12,17 @@ import lombok.Value;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonDeserialize(
-    builder = AccuWeatherLocationsAutocompleteDto.AccuWeatherLocationsAutocompleteDtoBuilder.class)
-public class AccuWeatherLocationsAutocompleteDto {
+    builder = AccuWeatherLocationSearchResultDto.AccuWeatherLocationSearchResultDtoBuilder.class)
+public class AccuWeatherLocationSearchResultDto {
 
   @JsonProperty("Key")
   String key;
 
-  @JsonProperty("LocalizedName")
-  String localizedName;
-
   @JsonProperty("Type")
   String type;
+
+  @JsonProperty("LocalizedName")
+  String localizedName;
 
   @JsonProperty("Country")
   AccuWeatherCountryDto country;

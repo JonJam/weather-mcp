@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
+import com.jonjam.weathermcp.locations.common.LocationSuggestionDto;
 import io.modelcontextprotocol.spec.McpSchema.CompleteResult;
 import java.util.Collections;
 import java.util.HashMap;

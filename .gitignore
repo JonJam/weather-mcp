@@ -42,3 +42,6 @@ application-local.yml
 
 ### Mac ###
 .DS_Store
+
+### Logs ###
+mcp-weather-stdio-server.log*
