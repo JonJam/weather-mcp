@@ -245,40 +245,15 @@ class CurrentConditionsProviderTest {
   class CurrentConditionsPrompt {
 
     @Test
-    @DisplayName("includes location and language tag from meta when locale is valid")
-    void includesLocationAndResolvedLanguageFromMeta() {
+    @DisplayName("includes location")
+    void includesLocation() {
       // Arrange
-      final var metadata = new HashMap<String, Object>();
-      metadata.put("locale", "en-GB");
-      final McpMeta meta = new McpMeta(metadata);
 
       // Act
-      final String prompt = provider.currentConditionsPrompt("London", meta);
+      final String prompt = provider.currentConditionsPrompt("London");
 
       // Assert
-      assertThat(
-          prompt,
-          is(
-              equalTo(
-                  "Provide the current weather conditions for London using language code en-GB.")));
-    }
-
-    @Test
-    @DisplayName("uses default language tag when meta has no locale")
-    void usesDefaultLanguageWhenMetaHasNoLocale() {
-      // Arrange
-      final var metadata = new HashMap<String, Object>();
-      final McpMeta meta = new McpMeta(metadata);
-
-      // Act
-      final String prompt = provider.currentConditionsPrompt("Paris", meta);
-
-      // Assert
-      assertThat(
-          prompt,
-          is(
-              equalTo(
-                  "Provide the current weather conditions for Paris using language code en-US.")));
+      assertThat(prompt, is(equalTo("Provide the current weather conditions for London.")));
     }
   }
 }

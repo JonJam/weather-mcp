@@ -17,8 +17,8 @@ class DailyForecastProviderTest {
   class DailyForecastPrompt {
 
     @Test
-    @DisplayName("includes location and resolved language code")
-    void includesLocationAndResolvedLanguageCode() {
+    @DisplayName("includes location.")
+    void includesLocation() {
       // Arrange
 
       // Act
