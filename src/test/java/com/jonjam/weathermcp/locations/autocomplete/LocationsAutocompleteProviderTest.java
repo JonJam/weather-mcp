@@ -28,8 +28,8 @@ class LocationsAutocompleteProviderTest {
   @InjectMocks private LocationsAutocompleteProvider provider;
 
   @Nested
-  @DisplayName("autocompleteForCitiesAndPointsOfInterest")
-  class AutocompleteForCitiesAndPointsOfInterest {
+  @DisplayName("completeLocationForCurrentConditions")
+  class CompleteLocationForCurrentConditions {
 
     @Test
     @DisplayName("completes location using gateway")
@@ -50,7 +50,7 @@ class LocationsAutocompleteProviderTest {
       final McpMeta meta = new McpMeta(metadata);
 
       // Act
-      final CompleteResult result = provider.completeLocation("san", meta);
+      final CompleteResult result = provider.completeLocationForCurrentConditions("san", meta);
 
       // Assert
       final CompleteResult.CompleteCompletion completion = result.completion();
@@ -68,7 +68,7 @@ class LocationsAutocompleteProviderTest {
       final McpMeta meta = new McpMeta(metadata);
 
       // Act
-      final CompleteResult result = provider.completeLocation(null, meta);
+      final CompleteResult result = provider.completeLocationForCurrentConditions(null, meta);
 
       // Assert
       final CompleteResult.CompleteCompletion completion = result.completion();
@@ -86,7 +86,7 @@ class LocationsAutocompleteProviderTest {
       final McpMeta meta = new McpMeta(metadata);
 
       // Act
-      final CompleteResult result = provider.completeLocation("", meta);
+      final CompleteResult result = provider.completeLocationForCurrentConditions("", meta);
 
       // Assert
       final CompleteResult.CompleteCompletion completion = result.completion();
@@ -104,7 +104,7 @@ class LocationsAutocompleteProviderTest {
       final McpMeta meta = new McpMeta(metadata);
 
       // Act
-      final CompleteResult result = provider.completeLocation("ab", meta);
+      final CompleteResult result = provider.completeLocationForCurrentConditions("ab", meta);
 
       // Assert
       final CompleteResult.CompleteCompletion completion = result.completion();
@@ -124,13 +124,47 @@ class LocationsAutocompleteProviderTest {
       final String overMaxLength = "a".repeat(101);
 
       // Act
-      final CompleteResult result = provider.completeLocation(overMaxLength, meta);
+      final CompleteResult result =
+          provider.completeLocationForCurrentConditions(overMaxLength, meta);
 
       // Assert
       final CompleteResult.CompleteCompletion completion = result.completion();
 
       assertThat(completion.hasMore(), is(false));
       assertThat(completion.values(), is(Collections.emptyList()));
+    }
+  }
+
+  @Nested
+  @DisplayName("completeLocationForDailyForecast")
+  class CompleteLocationForDailyForecast {
+
+    @Test
+    @DisplayName("completes location using gateway")
+    void completesLocationUsingGateway() {
+      // Arrange
+      when(gateway.autocompleteForCitiesAndPointsOfInterest("san", Locale.US))
+          .thenReturn(
+              List.of(
+                  LocationSuggestionDto.builder()
+                      .id("12345")
+                      .localizedName("San Francisco")
+                      .countryKey("US")
+                      .countryLocalizedName("United States")
+                      .build()));
+
+      final var metadata = new HashMap<String, Object>();
+      metadata.put("locale", Locale.US.toLanguageTag());
+      final McpMeta meta = new McpMeta(metadata);
+
+      // Act
+      final CompleteResult result = provider.completeLocationForDailyForecast("san", meta);
+
+      // Assert
+      final CompleteResult.CompleteCompletion completion = result.completion();
+
+      assertThat(completion.hasMore(), is(false));
+      assertThat(completion.values(), is(List.of("San Francisco, United States")));
     }
   }
 }

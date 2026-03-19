@@ -21,7 +21,20 @@ public class LocationsAutocompleteProvider {
   private final LocationsAutocompleteGateway gateway;
 
   @McpComplete(prompt = Prompts.CURRENT_CONDITIONS_PROMPT)
-  public CompleteResult completeLocation(
+  public CompleteResult completeLocationForCurrentConditions(
+      final @Nullable String partialLocation, final McpMeta meta) {
+
+    return completeLocation(partialLocation, meta);
+  }
+
+  @McpComplete(prompt = Prompts.DAILY_FORECAST_PROMPT)
+  public CompleteResult completeLocationForDailyForecast(
+      final @Nullable String partialLocation, final McpMeta meta) {
+
+    return completeLocation(partialLocation, meta);
+  }
+
+  private CompleteResult completeLocation(
       final @Nullable String partialLocation, final McpMeta meta) {
 
     final var normalizedLocationOptional =
