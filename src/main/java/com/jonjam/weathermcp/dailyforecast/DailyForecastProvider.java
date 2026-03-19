@@ -1,4 +1,4 @@
-package com.jonjam.weathermcp.currentconditions;
+package com.jonjam.weathermcp.dailyforecast;
 
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
@@ -17,20 +17,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CurrentConditionsProvider {
+public class DailyForecastProvider {
 
   private final LocationsTextSearchGateway locationsTextSearchGateway;
-  private final CurrentConditionsGateway currentConditionsGateway;
-  private final CurrentConditionsToolResultMapper currentConditionsToolResultMapper;
+  private final DailyForecastGateway dailyForecastGateway;
+  private final DailyForecastToolResultMapper dailyForecastToolResultMapper;
 
   @McpPrompt(
-      name = Prompts.CURRENT_CONDITIONS_PROMPT,
-      description = "Ask for the current weather conditions in a location.")
-  public String currentConditionsPrompt(
+      name = Prompts.DAILY_FORECAST_PROMPT,
+      description = "Ask for the daily weather forecast in a location.")
+  public String dailyForecastPrompt(
       @McpArg(name = "location", description = "City or point of interest", required = true)
           final String location) {
 
-    final StringBuilder prompt = new StringBuilder("Provide the current weather conditions for ");
+    final StringBuilder prompt = new StringBuilder("Provide the daily weather forecast for ");
 
     prompt.append(location).append(".");
 
@@ -38,22 +38,22 @@ public class CurrentConditionsProvider {
   }
 
   @McpTool(
-      name = Prompts.CURRENT_CONDITIONS_PROMPT,
-      description = "Get the current weather conditions for a location.",
+      name = Prompts.DAILY_FORECAST_PROMPT,
+      description = "Get the daily weather forecast for a location.",
       annotations =
           @McpTool.McpAnnotations(
-              title = "Current Weather Conditions",
+              title = "Daily Weather Forecast",
               readOnlyHint = true,
               destructiveHint = false,
               idempotentHint = true,
               openWorldHint = true))
-  public CallToolResult currentConditionsTool(
+  public CallToolResult dailyForecastTool(
       @McpToolParam(description = "City or point of interest", required = true)
           final String location,
       final McpSyncRequestContext context,
       final McpMeta meta) {
 
-    context.info(String.format("Current conditions requested for raw location: %s", location));
+    context.info(String.format("Daily forecast requested for raw location: %s", location));
 
     final var normalizedLocationOptional =
         LocationValidationUtils.normalizeAndValidateLocation(location);
@@ -69,13 +69,12 @@ public class CurrentConditionsProvider {
     final String normalizedLocation = normalizedLocationOptional.orElseThrow();
 
     context.info(
-        String.format(
-            "Current conditions requested for normalized location: %s", normalizedLocation));
+        String.format("Daily forecast requested for normalized location: %s", normalizedLocation));
 
     final Locale resolvedLanguage = LocaleUtils.resolveLocale(meta);
 
     context.info(
-        String.format("Requesting in resolved lanaguage: %s", resolvedLanguage.toLanguageTag()));
+        String.format("Requesting in resolved language: %s", resolvedLanguage.toLanguageTag()));
 
     final var locationSuggestionOptional =
         locationsTextSearchGateway.search(normalizedLocation, resolvedLanguage);
@@ -92,52 +91,73 @@ public class CurrentConditionsProvider {
 
     context.info(
         String.format(
-            "Looking up current conditions for location: id=%s, name=%s, country=%s",
+            "Looking up daily forecast for location: id=%s, name=%s, country=%s",
             locationSuggestion.getId(),
             locationSuggestion.getLocalizedName(),
             locationSuggestion.getCountryLocalizedName()));
 
-    final var currentConditionsOptional =
-        currentConditionsGateway.getCurrentConditions(locationSuggestion.getId(), resolvedLanguage);
+    final var dailyForecastOptional =
+        dailyForecastGateway.getFiveDayForecast(locationSuggestion.getId(), resolvedLanguage);
 
-    if (currentConditionsOptional.isEmpty()) {
+    if (dailyForecastOptional.isEmpty()) {
       return CallToolResult.builder()
           .isError(true)
           .addTextContent(
-              String.format("Current conditions are not available for '%s'.", normalizedLocation))
+              String.format("Daily forecast is not available for '%s'.", normalizedLocation))
           .build();
     }
 
-    final var currentConditions = currentConditionsOptional.orElseThrow();
+    final var dailyForecastSummary = dailyForecastOptional.orElseThrow();
 
     context.info(
         String.format(
-            "Current conditions found for location=%s; mapping tool result.",
+            "Daily forecast found for location=%s; mapping tool result.",
             locationSuggestion.getId()));
 
-    final CurrentConditionsToolResult toolResult =
-        currentConditionsToolResultMapper.toToolResult(
+    final DailyForecastToolResult toolResult =
+        dailyForecastToolResultMapper.toToolResult(
             locationSuggestion.getLocalizedName(),
             locationSuggestion.getCountryLocalizedName(),
-            currentConditions);
+            dailyForecastSummary);
 
     context.info(
         String.format(
-            "Returning current conditions tool result for: %s, %s",
+            "Returning daily forecast tool result for: %s, %s",
             locationSuggestion.getLocalizedName(), locationSuggestion.getCountryLocalizedName()));
 
-    final String formattedToolResult =
-        String.format(
-            "Location: %s, Country: %s, Temperature: %d°C (%d°F), Conditions: %s",
-            toolResult.getLocationLocalizedName(),
-            toolResult.getCountryLocalizedName(),
-            toolResult.getTemperatureMetric(),
-            toolResult.getTemperatureImperial(),
-            toolResult.getWeatherText());
+    final String formattedToolResult = formatDailyForecastText(toolResult);
 
     return CallToolResult.builder()
         .addTextContent(formattedToolResult)
         .structuredContent(toolResult)
         .build();
+  }
+
+  private static String formatDailyForecastText(final DailyForecastToolResult toolResult) {
+
+    final StringBuilder text = new StringBuilder();
+    text.append(
+        String.format(
+            "Location: %s, Country: %s%nHeadline: %s%n",
+            toolResult.getLocationLocalizedName(),
+            toolResult.getCountryLocalizedName(),
+            toolResult.getHeadlineText()));
+
+    for (final DailyForecastDayToolResult day : toolResult.getDays()) {
+      text.append(
+          String.format(
+              "%s: Low %.1f°%s High %.1f°%s, Day: %s, Night: %s%n",
+              day.getDate(),
+              day.getMinimumTemperature(),
+              day.getTemperatureUnit(),
+              day.getMaximumTemperature(),
+              day.getTemperatureUnit(),
+              day.getDaySummary(),
+              day.getNightSummary()));
+    }
+
+    text.append(String.format("More detail: %s", toolResult.getHeadlineLink()));
+
+    return text.toString();
   }
 }
