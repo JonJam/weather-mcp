@@ -1,3 +1,10 @@
+# Prefer console logging for tests over writing to a file.
+logging:
+  console:
+    enabled: true
+  file:
+    name:
+
 spring:
   ai:
     mcp:
