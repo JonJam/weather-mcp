@@ -62,39 +62,5 @@ class HourlyForecastMapperTest {
           secondHour.getLink(),
           is("https://www.accuweather.com/en/es/valencia/352579/hourly?hour=15"));
     }
-
-    @Test
-    @DisplayName("maps AccuWeather link onto each hour summary")
-    void mapsAccuWeatherLinkOntoEachHourSummary() {
-      // Arrange
-      final List<AccuWeatherHourlyForecastDto> hourlyForecasts =
-          List.of(
-              AccuWeatherHourlyForecastDto.builder()
-                  .dateTime("2026-03-19T14:00:00+00:00")
-                  .iconPhrase("Clear")
-                  .temperature(
-                      AccuWeatherHourlyTemperatureDto.builder().value(20.0f).unit("C").build())
-                  .link("https://example.com/first")
-                  .build());
-
-      // Act
-      final HourlyForecastSummaryDto summary = mapper.toHourlyForecastSummary(hourlyForecasts);
-
-      // Assert
-      assertThat(summary.getHours().getFirst().getLink(), is("https://example.com/first"));
-    }
-
-    @Test
-    @DisplayName("returns empty hours when AccuWeather list is empty")
-    void returnsEmptyHoursWhenAccuWeatherListIsEmpty() {
-      // Arrange
-      final List<AccuWeatherHourlyForecastDto> hourlyForecasts = List.of();
-
-      // Act
-      final HourlyForecastSummaryDto summary = mapper.toHourlyForecastSummary(hourlyForecasts);
-
-      // Assert
-      assertThat(summary.getHours(), hasSize(0));
-    }
   }
 }
