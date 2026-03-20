@@ -9,7 +9,7 @@
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "echo \"TODO: Publish Docker image or MCP package for this release (version ${nextRelease.version})\""
+        "publishCmd": "echo \"Release ${nextRelease.version} created; tag v${nextRelease.version} will trigger publish-mcp workflow to build Docker image and publish to MCP registry\""
       }
     ]
   ]

@@ -54,6 +54,19 @@ If you are using SDKMAN, `command` should be `~/.sdkman/candidates/java/current/
 
 This was sourced from the [MCP docs](https://modelcontextprotocol.io/docs/develop/build-server#testing-your-server-with-claude-for-desktop-3).
 
+### Docker
+
+Build and run the MCP server as a container (Dockerfile builds from source):
+
+```bash
+docker build -t accuweather-mcp .
+docker run --rm -i -e ACCUWEATHER_API_KEY=your-api-key accuweather-mcp
+```
+
+### MCP Registry
+
+This server is published to the [MCP Registry](https://modelcontextprotocol.io/registry). When using an MCP client that supports the registry (e.g. Cursor, Claude Desktop), you can add `io.github.jonjam/accuweather-mcp` from the registry and configure your AccuWeather API key as the `ACCUWEATHER_API_KEY` environment variable.
+
 Example user prompt:
 
 ```
