@@ -105,4 +105,3 @@ More information about patterns and practises for this project can be found in A
 ### Tools
 
 - Ensure to handle errors (i.e. validation) according to the [specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
-
