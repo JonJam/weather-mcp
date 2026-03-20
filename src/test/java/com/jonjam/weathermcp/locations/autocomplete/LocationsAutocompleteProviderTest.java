@@ -167,4 +167,37 @@ class LocationsAutocompleteProviderTest {
       assertThat(completion.values(), is(List.of("San Francisco, United States")));
     }
   }
+
+  @Nested
+  @DisplayName("completeLocationForHourlyForecast")
+  class CompleteLocationForHourlyForecast {
+
+    @Test
+    @DisplayName("completes location using gateway")
+    void completesLocationUsingGateway() {
+      // Arrange
+      when(gateway.autocompleteForCitiesAndPointsOfInterest("val", Locale.US))
+          .thenReturn(
+              List.of(
+                  LocationSuggestionDto.builder()
+                      .id("352579")
+                      .localizedName("Valencia")
+                      .countryKey("ES")
+                      .countryLocalizedName("Spain")
+                      .build()));
+
+      final var metadata = new HashMap<String, Object>();
+      metadata.put("locale", Locale.US.toLanguageTag());
+      final McpMeta meta = new McpMeta(metadata);
+
+      // Act
+      final CompleteResult result = provider.completeLocationForHourlyForecast("val", meta);
+
+      // Assert
+      final CompleteResult.CompleteCompletion completion = result.completion();
+
+      assertThat(completion.hasMore(), is(false));
+      assertThat(completion.values(), is(List.of("Valencia, Spain")));
+    }
+  }
 }

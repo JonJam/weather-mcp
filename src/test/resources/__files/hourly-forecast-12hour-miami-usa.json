@@ -1,0 +1,198 @@
+[
+  {
+    "DateTime": "2026-03-20T04:00:00-04:00",
+    "EpochDateTime": 1773993600,
+    "WeatherIcon": 35,
+    "IconPhrase": "Partly cloudy",
+    "HasPrecipitation": false,
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 18.5,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 47,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=4&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=4&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T05:00:00-04:00",
+    "EpochDateTime": 1773997200,
+    "WeatherIcon": 35,
+    "IconPhrase": "Partly cloudy",
+    "HasPrecipitation": false,
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 18.4,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 34,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=5&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=5&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T06:00:00-04:00",
+    "EpochDateTime": 1774000800,
+    "WeatherIcon": 35,
+    "IconPhrase": "Partly cloudy",
+    "HasPrecipitation": false,
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 18.3,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 34,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=6&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=6&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T07:00:00-04:00",
+    "EpochDateTime": 1774004400,
+    "WeatherIcon": 35,
+    "IconPhrase": "Partly cloudy",
+    "HasPrecipitation": false,
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 18.5,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 34,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=7&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=7&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T08:00:00-04:00",
+    "EpochDateTime": 1774008000,
+    "WeatherIcon": 3,
+    "IconPhrase": "Partly sunny",
+    "HasPrecipitation": false,
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 18.7,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 34,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=8&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=8&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T09:00:00-04:00",
+    "EpochDateTime": 1774011600,
+    "WeatherIcon": 3,
+    "IconPhrase": "Partly sunny",
+    "HasPrecipitation": false,
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 19.4,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 34,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=9&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=9&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T10:00:00-04:00",
+    "EpochDateTime": 1774015200,
+    "WeatherIcon": 3,
+    "IconPhrase": "Partly sunny",
+    "HasPrecipitation": false,
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 20.4,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 40,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=10&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=10&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T11:00:00-04:00",
+    "EpochDateTime": 1774018800,
+    "WeatherIcon": 14,
+    "IconPhrase": "Partly sunny w/ showers",
+    "HasPrecipitation": true,
+    "PrecipitationType": "Rain",
+    "PrecipitationIntensity": "Light",
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 21.5,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 62,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=11&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=11&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T12:00:00-04:00",
+    "EpochDateTime": 1774022400,
+    "WeatherIcon": 14,
+    "IconPhrase": "Partly sunny w/ showers",
+    "HasPrecipitation": true,
+    "PrecipitationType": "Rain",
+    "PrecipitationIntensity": "Light",
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 22.1,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 62,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=12&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=12&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T13:00:00-04:00",
+    "EpochDateTime": 1774026000,
+    "WeatherIcon": 3,
+    "IconPhrase": "Partly sunny",
+    "HasPrecipitation": false,
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 22.5,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 49,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=13&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=13&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T14:00:00-04:00",
+    "EpochDateTime": 1774029600,
+    "WeatherIcon": 3,
+    "IconPhrase": "Partly sunny",
+    "HasPrecipitation": false,
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 22.8,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 20,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=14&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=14&unit=c&lang=en-us"
+  },
+  {
+    "DateTime": "2026-03-20T15:00:00-04:00",
+    "EpochDateTime": 1774033200,
+    "WeatherIcon": 3,
+    "IconPhrase": "Partly sunny",
+    "HasPrecipitation": false,
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 23.7,
+      "Unit": "C",
+      "UnitType": 17
+    },
+    "PrecipitationProbability": 20,
+    "MobileLink": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=15&unit=c&lang=en-us",
+    "Link": "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=15&unit=c&lang=en-us"
+  }
+]

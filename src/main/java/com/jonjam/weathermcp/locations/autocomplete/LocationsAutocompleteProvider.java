@@ -34,6 +34,13 @@ public class LocationsAutocompleteProvider {
     return completeLocation(partialLocation, meta);
   }
 
+  @McpComplete(prompt = Prompts.HOURLY_FORECAST_PROMPT)
+  public CompleteResult completeLocationForHourlyForecast(
+      final @Nullable String partialLocation, final McpMeta meta) {
+
+    return completeLocation(partialLocation, meta);
+  }
+
   private CompleteResult completeLocation(
       final @Nullable String partialLocation, final McpMeta meta) {
 

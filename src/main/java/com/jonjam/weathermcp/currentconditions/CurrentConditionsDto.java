@@ -14,9 +14,9 @@ public class CurrentConditionsDto {
 
   String weatherText;
 
-  long temperatureMetric;
+  float temperatureMetric;
 
-  long temperatureImperial;
+  float temperatureImperial;
 
   String link;
 }

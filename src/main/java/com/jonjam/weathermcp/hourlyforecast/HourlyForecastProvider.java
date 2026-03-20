@@ -1,4 +1,4 @@
-package com.jonjam.weathermcp.currentconditions;
+package com.jonjam.weathermcp.hourlyforecast;
 
 import com.jonjam.weathermcp.LocaleUtils;
 import com.jonjam.weathermcp.Prompts;
@@ -17,20 +17,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CurrentConditionsProvider {
+public class HourlyForecastProvider {
 
   private final LocationsTextSearchGateway locationsTextSearchGateway;
-  private final CurrentConditionsGateway currentConditionsGateway;
-  private final CurrentConditionsToolResultMapper currentConditionsToolResultMapper;
+  private final HourlyForecastGateway hourlyForecastGateway;
+  private final HourlyForecastToolResultMapper hourlyForecastToolResultMapper;
 
   @McpPrompt(
-      name = Prompts.CURRENT_CONDITIONS_PROMPT,
-      description = "Ask for the current weather conditions in a location.")
-  public String currentConditionsPrompt(
+      name = Prompts.HOURLY_FORECAST_PROMPT,
+      description = "Ask for the hourly weather forecast in a location.")
+  public String hourlyForecastPrompt(
       @McpArg(name = "location", description = "City or point of interest", required = true)
           final String location) {
 
-    final StringBuilder prompt = new StringBuilder("Provide the current weather conditions for ");
+    final StringBuilder prompt = new StringBuilder("Provide the hourly weather forecast for ");
 
     prompt.append(location).append(".");
 
@@ -38,22 +38,22 @@ public class CurrentConditionsProvider {
   }
 
   @McpTool(
-      name = Prompts.CURRENT_CONDITIONS_PROMPT,
-      description = "Get the current weather conditions for a location.",
+      name = Prompts.HOURLY_FORECAST_PROMPT,
+      description = "Get the 12-hour hourly weather forecast for a location.",
       annotations =
           @McpTool.McpAnnotations(
-              title = "Current Weather Conditions",
+              title = "Hourly Weather Forecast",
               readOnlyHint = true,
               destructiveHint = false,
               idempotentHint = true,
               openWorldHint = true))
-  public CallToolResult currentConditionsTool(
+  public CallToolResult hourlyForecastTool(
       @McpToolParam(description = "City or point of interest", required = true)
           final String location,
       final McpSyncRequestContext context,
       final McpMeta meta) {
 
-    context.info(String.format("Current conditions requested for raw location: %s", location));
+    context.info(String.format("Hourly forecast requested for raw location: %s", location));
 
     final var normalizedLocationOptional =
         LocationValidationUtils.normalizeAndValidateLocation(location);
@@ -69,13 +69,12 @@ public class CurrentConditionsProvider {
     final String normalizedLocation = normalizedLocationOptional.orElseThrow();
 
     context.info(
-        String.format(
-            "Current conditions requested for normalized location: %s", normalizedLocation));
+        String.format("Hourly forecast requested for normalized location: %s", normalizedLocation));
 
     final Locale resolvedLanguage = LocaleUtils.resolveLocale(meta);
 
     context.info(
-        String.format("Requesting in resolved lanaguage: %s", resolvedLanguage.toLanguageTag()));
+        String.format("Requesting in resolved language: %s", resolvedLanguage.toLanguageTag()));
 
     final var locationSuggestionOptional =
         locationsTextSearchGateway.search(normalizedLocation, resolvedLanguage);
@@ -92,52 +91,68 @@ public class CurrentConditionsProvider {
 
     context.info(
         String.format(
-            "Looking up current conditions for location: id=%s, name=%s, country=%s",
+            "Looking up hourly forecast for location: id=%s, name=%s, country=%s",
             locationSuggestion.getId(),
             locationSuggestion.getLocalizedName(),
             locationSuggestion.getCountryLocalizedName()));
 
-    final var currentConditionsOptional =
-        currentConditionsGateway.getCurrentConditions(locationSuggestion.getId(), resolvedLanguage);
+    final var hourlyForecastOptional =
+        hourlyForecastGateway.getHourlyForecastForTwelveHours(
+            locationSuggestion.getId(), resolvedLanguage);
 
-    if (currentConditionsOptional.isEmpty()) {
+    if (hourlyForecastOptional.isEmpty()) {
       return CallToolResult.builder()
           .isError(true)
           .addTextContent(
-              String.format("Current conditions are not available for '%s'.", normalizedLocation))
+              String.format("Hourly forecast is not available for '%s'.", normalizedLocation))
           .build();
     }
 
-    final var currentConditions = currentConditionsOptional.orElseThrow();
+    final var hourlyForecastSummary = hourlyForecastOptional.orElseThrow();
 
     context.info(
         String.format(
-            "Current conditions found for location=%s; mapping tool result.",
+            "Hourly forecast found for location=%s; mapping tool result.",
             locationSuggestion.getId()));
 
-    final CurrentConditionsToolResult toolResult =
-        currentConditionsToolResultMapper.toToolResult(
+    final HourlyForecastToolResult toolResult =
+        hourlyForecastToolResultMapper.toToolResult(
             locationSuggestion.getLocalizedName(),
             locationSuggestion.getCountryLocalizedName(),
-            currentConditions);
+            hourlyForecastSummary);
 
     context.info(
         String.format(
-            "Returning current conditions tool result for: %s, %s",
+            "Returning hourly forecast tool result for: %s, %s",
             locationSuggestion.getLocalizedName(), locationSuggestion.getCountryLocalizedName()));
 
-    final String formattedToolResult =
-        String.format(
-            "Location: %s, Country: %s, Temperature: %.1f°C (%.1f°F), Conditions: %s",
-            toolResult.getLocationLocalizedName(),
-            toolResult.getCountryLocalizedName(),
-            toolResult.getTemperatureMetric(),
-            toolResult.getTemperatureImperial(),
-            toolResult.getWeatherText());
+    final String formattedToolResult = formatHourlyForecastText(toolResult);
 
     return CallToolResult.builder()
         .addTextContent(formattedToolResult)
         .structuredContent(toolResult)
         .build();
+  }
+
+  private static String formatHourlyForecastText(final HourlyForecastToolResult toolResult) {
+
+    final StringBuilder text = new StringBuilder();
+    text.append(
+        String.format(
+            "Location: %s, Country: %s%n",
+            toolResult.getLocationLocalizedName(), toolResult.getCountryLocalizedName()));
+
+    for (final HourlyForecastHourToolResult hour : toolResult.getHours()) {
+      text.append(
+          String.format(
+              "%s: %.1f°%s, %s. More detail: %s.%n",
+              hour.getDateTime(),
+              hour.getTemperatureValue(),
+              hour.getTemperatureUnit(),
+              hour.getIconPhrase(),
+              hour.getLink()));
+    }
+
+    return text.toString();
   }
 }

@@ -1,9 +1,10 @@
-package com.jonjam.weathermcp.currentconditions;
+package com.jonjam.weathermcp.hourlyforecast;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -23,45 +24,48 @@ import org.wiremock.spring.InjectWireMock;
 @SpringBootTest
 @EnableWireMock(
     @ConfigureWireMock(baseUrlProperties = "spring.http.serviceclient.accuweather.base-url"))
-class CurrentConditionsGatewayIntegrationTest {
+class HourlyForecastGatewayIntegrationTest {
 
   @InjectWireMock private WireMockServer wireMock;
 
-  @Autowired private CurrentConditionsGateway gateway;
+  @Autowired private HourlyForecastGateway gateway;
 
   @Nested
-  @DisplayName("getCurrentConditions")
-  class GetCurrentConditions {
+  @DisplayName("getHourlyForecastForTwelveHours")
+  class GetHourlyForecastForTwelveHours {
 
     @Test
-    @DisplayName("returns current conditions when AccuWeather returns a result")
-    void returnsCurrentConditionsWhenAccuWeatherReturnsAResult() {
+    @DisplayName("returns summary when AccuWeather returns hourly forecasts")
+    void returnsSummaryWhenAccuWeatherReturnsHourlyForecasts() {
       // Arrange
       wireMock.stubFor(
-          get(urlPathEqualTo("/currentconditions/v1/329260"))
+          get(urlPathEqualTo("/forecasts/v1/hourly/12hour/347936"))
               .willReturn(
                   aResponse()
                       .withStatus(200)
                       .withHeader("Content-Type", "application/json")
-                      .withBodyFile("current-conditions-manchester-uk.json")));
+                      .withBodyFile("hourly-forecast-12hour-miami-usa.json")));
 
       final Locale locale = Locale.forLanguageTag("en-us");
 
       // Act
-      final Optional<CurrentConditionsDto> result = gateway.getCurrentConditions("329260", locale);
+      final Optional<HourlyForecastSummaryDto> result =
+          gateway.getHourlyForecastForTwelveHours("347936", locale);
 
       // Assert
-      assertThat(result.isPresent(), is(true));
-      final CurrentConditionsDto currentConditions = result.orElseThrow();
+      final HourlyForecastSummaryDto summary = result.orElseThrow();
 
-      assertThat(currentConditions.getLocalObservationDateTime(), is("2026-03-12T17:47:00+00:00"));
-      assertThat(currentConditions.getWeatherText(), is("Rain"));
-      assertThat(currentConditions.getTemperatureImperial(), is(54f));
-      assertThat(currentConditions.getTemperatureMetric(), is(12f));
+      assertThat(summary.getHours(), hasSize(12));
+
+      final HourlyForecastHourSummaryDto firstHour = summary.getHours().get(0);
+      assertThat(firstHour.getDateTime(), is("2026-03-20T04:00:00-04:00"));
+      assertThat(firstHour.getIconPhrase(), is("Partly cloudy"));
+      assertThat(firstHour.getTemperatureValue(), is(18.5f));
+      assertThat(firstHour.getTemperatureUnit(), is("C"));
       assertThat(
-          currentConditions.getLink(),
+          firstHour.getLink(),
           is(
-              "https://www.accuweather.com/en/gb/manchester/m15-6/current-weather/329260?lang=en-us"));
+              "http://www.accuweather.com/en/us/miami-fl/33128/hourly-weather-forecast/347936?day=1&hbhhour=4&unit=c&lang=en-us"));
     }
   }
 }

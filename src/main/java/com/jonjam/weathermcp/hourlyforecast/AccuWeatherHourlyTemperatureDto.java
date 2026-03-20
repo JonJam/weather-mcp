@@ -1,4 +1,4 @@
-package com.jonjam.weathermcp.currentconditions;
+package com.jonjam.weathermcp.hourlyforecast;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -10,8 +10,9 @@ import lombok.Value;
 @Value
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonDeserialize(builder = AccuWeatherTemperatureUnitDto.AccuWeatherTemperatureUnitDtoBuilder.class)
-public class AccuWeatherTemperatureUnitDto {
+@JsonDeserialize(
+    builder = AccuWeatherHourlyTemperatureDto.AccuWeatherHourlyTemperatureDtoBuilder.class)
+public class AccuWeatherHourlyTemperatureDto {
 
   @JsonProperty("Value")
   float value;
