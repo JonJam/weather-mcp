@@ -29,22 +29,14 @@ class HourlyForecastMapperTest {
                   .dateTime("2026-03-19T14:00:00+00:00")
                   .iconPhrase("Intermittent clouds")
                   .temperature(
-                      AccuWeatherHourlyTemperatureDto.builder()
-                          .value(18.5f)
-                          .unit("C")
-                          .unitType(17)
-                          .build())
+                      AccuWeatherHourlyTemperatureDto.builder().value(18.5f).unit("C").build())
                   .link("https://www.accuweather.com/en/es/valencia/352579/hourly")
                   .build(),
               AccuWeatherHourlyForecastDto.builder()
                   .dateTime("2026-03-19T15:00:00+00:00")
                   .iconPhrase("Partly sunny")
                   .temperature(
-                      AccuWeatherHourlyTemperatureDto.builder()
-                          .value(19.2f)
-                          .unit("C")
-                          .unitType(17)
-                          .build())
+                      AccuWeatherHourlyTemperatureDto.builder().value(19.2f).unit("C").build())
                   .link("https://www.accuweather.com/en/es/valencia/352579/hourly?hour=15")
                   .build());
 
@@ -79,11 +71,7 @@ class HourlyForecastMapperTest {
                   .dateTime("2026-03-19T14:00:00+00:00")
                   .iconPhrase("Clear")
                   .temperature(
-                      AccuWeatherHourlyTemperatureDto.builder()
-                          .value(20.0f)
-                          .unit("C")
-                          .unitType(17)
-                          .build())
+                      AccuWeatherHourlyTemperatureDto.builder().value(20.0f).unit("C").build())
                   .link("https://example.com/first")
                   .build());
 

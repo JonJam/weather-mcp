@@ -128,7 +128,7 @@ public class CurrentConditionsProvider {
 
     final String formattedToolResult =
         String.format(
-            "Location: %s, Country: %s, Temperature: %d°C (%d°F), Conditions: %s",
+            "Location: %s, Country: %s, Temperature: %.1f°C (%.1f°F), Conditions: %s",
             toolResult.getLocationLocalizedName(),
             toolResult.getCountryLocalizedName(),
             toolResult.getTemperatureMetric(),

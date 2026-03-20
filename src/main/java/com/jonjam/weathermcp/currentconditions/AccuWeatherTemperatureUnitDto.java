@@ -14,7 +14,7 @@ import lombok.Value;
 public class AccuWeatherTemperatureUnitDto {
 
   @JsonProperty("Value")
-  long value;
+  float value;
 
   @JsonProperty("Unit")
   String unit;

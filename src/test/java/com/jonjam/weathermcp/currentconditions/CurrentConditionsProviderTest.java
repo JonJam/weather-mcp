@@ -236,7 +236,7 @@ class CurrentConditionsProviderTest {
       assertThat(
           content.text(),
           is(
-              "Location: San Francisco, Country: United States, Temperature: 20°C (68°F), Conditions: Sunny"));
+              "Location: San Francisco, Country: United States, Temperature: 20.0°C (68.0°F), Conditions: Sunny"));
     }
   }
 

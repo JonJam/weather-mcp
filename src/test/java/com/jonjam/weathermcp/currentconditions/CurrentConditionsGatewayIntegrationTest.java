@@ -56,8 +56,8 @@ class CurrentConditionsGatewayIntegrationTest {
 
       assertThat(currentConditions.getLocalObservationDateTime(), is("2026-03-12T17:47:00+00:00"));
       assertThat(currentConditions.getWeatherText(), is("Rain"));
-      assertThat(currentConditions.getTemperatureImperial(), is(54L));
-      assertThat(currentConditions.getTemperatureMetric(), is(12L));
+      assertThat(currentConditions.getTemperatureImperial(), is(54f));
+      assertThat(currentConditions.getTemperatureMetric(), is(12f));
       assertThat(
           currentConditions.getLink(),
           is(

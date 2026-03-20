@@ -19,7 +19,6 @@ spring:
         instructions: "This server provides weather information."
         type: SYNC
         stdio: true
-        tool-callback-converter: false
         capabilities:
           completion: true
           resource: false

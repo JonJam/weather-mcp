@@ -41,8 +41,8 @@ class CurrentConditionsMapperTest {
       // Assert
       assertThat(result.getLocalObservationDateTime(), is("2024-01-01T12:00:00-08:00"));
       assertThat(result.getWeatherText(), is("Sunny"));
-      assertThat(result.getTemperatureMetric(), is(20L));
-      assertThat(result.getTemperatureImperial(), is(68L));
+      assertThat(result.getTemperatureMetric(), is(20f));
+      assertThat(result.getTemperatureImperial(), is(68f));
       assertThat(result.getLink(), is("https://example.com/current-conditions"));
     }
   }

@@ -19,7 +19,4 @@ public class AccuWeatherHourlyTemperatureDto {
 
   @JsonProperty("Unit")
   String unit;
-
-  @JsonProperty("UnitType")
-  int unitType;
 }

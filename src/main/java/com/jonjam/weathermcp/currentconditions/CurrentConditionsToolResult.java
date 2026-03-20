@@ -18,9 +18,9 @@ public class CurrentConditionsToolResult {
 
   String weatherText;
 
-  long temperatureMetric;
+  float temperatureMetric;
 
-  long temperatureImperial;
+  float temperatureImperial;
 
   String link;
 }
