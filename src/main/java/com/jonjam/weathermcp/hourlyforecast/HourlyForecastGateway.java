@@ -16,12 +16,9 @@ public class HourlyForecastGateway {
   public Optional<HourlyForecastSummaryDto> getTwelveHourForecast(
       final String locationKey, final Locale language) {
 
+    // TODO Add error handling
     final List<AccuWeatherHourlyForecastDto> hourlyForecasts =
         client.getTwelveHoursByLocationKey(locationKey, language.toLanguageTag(), true);
-
-    if (hourlyForecasts.isEmpty()) {
-      return Optional.empty();
-    }
 
     return Optional.of(hourlyForecastMapper.toHourlyForecastSummary(hourlyForecasts));
   }
