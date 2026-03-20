@@ -13,7 +13,7 @@ public class HourlyForecastGateway {
   private final AccuWeatherHourlyForecastsClient client;
   private final HourlyForecastMapper hourlyForecastMapper;
 
-  public Optional<HourlyForecastSummaryDto> getTwelveHourForecast(
+  public Optional<HourlyForecastSummaryDto> getHourlyForecastForTwelveHours(
       final String locationKey, final Locale language) {
 
     // TODO Add error handling

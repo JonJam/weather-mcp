@@ -97,7 +97,8 @@ public class HourlyForecastProvider {
             locationSuggestion.getCountryLocalizedName()));
 
     final var hourlyForecastOptional =
-        hourlyForecastGateway.getTwelveHourForecast(locationSuggestion.getId(), resolvedLanguage);
+        hourlyForecastGateway.getHourlyForecastForTwelveHours(
+            locationSuggestion.getId(), resolvedLanguage);
 
     if (hourlyForecastOptional.isEmpty()) {
       return CallToolResult.builder()

@@ -113,7 +113,7 @@ class HourlyForecastProviderTest {
                       .countryLocalizedName("United States")
                       .build()));
 
-      when(hourlyForecastGateway.getTwelveHourForecast("12345", Locale.US))
+      when(hourlyForecastGateway.getHourlyForecastForTwelveHours("12345", Locale.US))
           .thenReturn(Optional.empty());
 
       final var metadata = new HashMap<String, Object>();
@@ -173,7 +173,7 @@ class HourlyForecastProviderTest {
                           .build()))
               .build();
 
-      when(hourlyForecastGateway.getTwelveHourForecast("98765", Locale.US))
+      when(hourlyForecastGateway.getHourlyForecastForTwelveHours("98765", Locale.US))
           .thenReturn(Optional.of(summary));
 
       when(hourlyForecastToolResultMapper.toToolResult("San Francisco", "United States", summary))
