@@ -1,4 +1,4 @@
-# weather-mcp
+# accuweather-mcp
 
 ## Setup
 
@@ -27,7 +27,7 @@ logging:
 To test with [MCP Inspector]([https://modelcontextprotocol.io/docs/tools/inspector](https://modelcontextprotocol.io/docs/tools/inspector)), run the following from the root of the repo:
 
 ```bash
-npx @modelcontextprotocol/inspector   -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'   java -jar "build/libs/weathermcp-0.0.1-snapshot.jar"
+npx @modelcontextprotocol/inspector   -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'   java -jar "build/libs/accuweather-mcp-local-snapshot.jar"
 ````
 
 This was sourced from this [blog.](https://medium.com/@tsteidle/creating-an-mcp-server-with-spring-boot-setup-debugging-and-unit-testing-8edbac9da5a6)
@@ -39,9 +39,9 @@ This was sourced from this [blog.](https://medium.com/@tsteidle/creating-an-mcp-
 ```json
 {
   "mcpServers": {
-    "weather-mcp": {
+    "accuweather-mcp": {
       "command": "PATH_TO_JAVA",
-      "args": ["-jar", "ABSOLUTE_PATH_TO_REPO/build/libs/weathermcp-0.0.1-snapshot.jar"],
+      "args": ["-jar", "ABSOLUTE_PATH_TO_REPO/build/libs/accuweather-mcp-local-snapshot.jar"],
       "env": {
         "ACCUWEATHER_API_KEY": "API_KEY"
       }
@@ -57,7 +57,7 @@ This was sourced from the [MCP docs](https://modelcontextprotocol.io/docs/develo
 Example user prompt:
 
 ```
-Use the weather-mcp to look up the current weather in Manchester, UK.
+Use the accuweather-mcp to look up the current weather in Manchester, UK.
 ```
 
 ## Code style and static analysis

@@ -27,7 +27,7 @@ This file defines how agents should work in this repository and where to find re
 - **Package defaults**: Each Java package in this project should declare a `package-info.java` file that applies `@NullMarked`:
   ```java
   @NullMarked
-  package com.jonjam.weathermcp;
+  package com.jonjam.accuweathermcp;
 
   import org.jspecify.annotations.NullMarked;
   ```

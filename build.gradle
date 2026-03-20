@@ -8,8 +8,8 @@ plugins {
 }
 
 group = 'com.jonjam'
-version = System.getenv('APP_VERSION') ?: '0.0.1-snapshot'
-description = 'Weather MCP'
+version = System.getenv('APP_VERSION') ?: 'local-snapshot'
+description = 'AccuWeather MCP'
 
 java {
 	toolchain {

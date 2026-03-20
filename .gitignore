@@ -44,4 +44,4 @@ application-local.yml
 .DS_Store
 
 ### Logs ###
-mcp-weather-stdio-server.log*
+accuweather-mcp.log*
