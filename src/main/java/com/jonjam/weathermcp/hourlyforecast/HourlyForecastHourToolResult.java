@@ -17,6 +17,4 @@ public class HourlyForecastHourToolResult {
   float temperatureValue;
 
   String temperatureUnit;
-
-  int precipitationProbability;
 }

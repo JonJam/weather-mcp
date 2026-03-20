@@ -29,7 +29,6 @@ public class HourlyForecastToolResultMapper {
         .iconPhrase(hour.getIconPhrase())
         .temperatureValue(hour.getTemperatureValue())
         .temperatureUnit(hour.getTemperatureUnit())
-        .precipitationProbability(hour.getPrecipitationProbability())
         .build();
   }
 }

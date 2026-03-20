@@ -30,7 +30,6 @@ public class HourlyForecastMapper {
         .iconPhrase(hourly.getIconPhrase())
         .temperatureValue(temperature.getValue())
         .temperatureUnit(temperature.getUnit())
-        .precipitationProbability(hourly.getPrecipitationProbability())
         .build();
   }
 }

@@ -66,7 +66,6 @@ class HourlyForecastGatewayIntegrationTest {
       assertThat(firstHour.getIconPhrase(), is("Intermittent clouds"));
       assertThat(firstHour.getTemperatureValue(), is(18.5f));
       assertThat(firstHour.getTemperatureUnit(), is("C"));
-      assertThat(firstHour.getPrecipitationProbability(), is(10));
     }
   }
 }

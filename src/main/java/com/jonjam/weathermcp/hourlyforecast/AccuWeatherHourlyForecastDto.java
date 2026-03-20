@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
-import org.jspecify.annotations.Nullable;
 
 @Value
 @Builder
@@ -23,9 +22,6 @@ public class AccuWeatherHourlyForecastDto {
   @JsonProperty("Temperature")
   AccuWeatherHourlyTemperatureDto temperature;
 
-  @JsonProperty("PrecipitationProbability")
-  int precipitationProbability;
-
   @JsonProperty("Link")
-  @Nullable String link;
+  String link;
 }

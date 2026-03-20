@@ -34,7 +34,6 @@ class HourlyForecastMapperTest {
                           .unit("C")
                           .unitType(17)
                           .build())
-                  .precipitationProbability(10)
                   .link("https://www.accuweather.com/en/es/valencia/352579/hourly")
                   .build(),
               AccuWeatherHourlyForecastDto.builder()
@@ -46,7 +45,6 @@ class HourlyForecastMapperTest {
                           .unit("C")
                           .unitType(17)
                           .build())
-                  .precipitationProbability(15)
                   .link("https://www.accuweather.com/en/es/valencia/352579/hourly?hour=15")
                   .build());
 
@@ -63,14 +61,12 @@ class HourlyForecastMapperTest {
       assertThat(firstHour.getIconPhrase(), is("Intermittent clouds"));
       assertThat(firstHour.getTemperatureValue(), is(18.5f));
       assertThat(firstHour.getTemperatureUnit(), is("C"));
-      assertThat(firstHour.getPrecipitationProbability(), is(10));
 
       final HourlyForecastHourSummaryDto secondHour = summary.getHours().get(1);
       assertThat(secondHour.getDateTime(), is("2026-03-19T15:00:00+00:00"));
       assertThat(secondHour.getIconPhrase(), is("Partly sunny"));
       assertThat(secondHour.getTemperatureValue(), is(19.2f));
       assertThat(secondHour.getTemperatureUnit(), is("C"));
-      assertThat(secondHour.getPrecipitationProbability(), is(15));
     }
 
     @Test
@@ -88,7 +84,6 @@ class HourlyForecastMapperTest {
                           .unit("C")
                           .unitType(17)
                           .build())
-                  .precipitationProbability(0)
                   .link("https://example.com/first")
                   .build());
 

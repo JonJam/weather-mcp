@@ -33,7 +33,6 @@ class HourlyForecastToolResultMapperTest {
                           .iconPhrase("Intermittent clouds")
                           .temperatureValue(18.5f)
                           .temperatureUnit("C")
-                          .precipitationProbability(10)
                           .build()))
               .build();
 
@@ -51,7 +50,6 @@ class HourlyForecastToolResultMapperTest {
       assertThat(hour.getIconPhrase(), is("Intermittent clouds"));
       assertThat(hour.getTemperatureValue(), is(18.5f));
       assertThat(hour.getTemperatureUnit(), is("C"));
-      assertThat(hour.getPrecipitationProbability(), is(10));
     }
 
     @Test
@@ -68,7 +66,6 @@ class HourlyForecastToolResultMapperTest {
                           .iconPhrase("Partly sunny")
                           .temperatureValue(19.2f)
                           .temperatureUnit("C")
-                          .precipitationProbability(15)
                           .build()))
               .build();
 

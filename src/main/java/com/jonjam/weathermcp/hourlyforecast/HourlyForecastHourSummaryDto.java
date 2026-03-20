@@ -17,6 +17,4 @@ public class HourlyForecastHourSummaryDto {
   float temperatureValue;
 
   String temperatureUnit;
-
-  int precipitationProbability;
 }

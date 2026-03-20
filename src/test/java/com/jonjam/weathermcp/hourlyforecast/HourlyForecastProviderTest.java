@@ -155,7 +155,6 @@ class HourlyForecastProviderTest {
                           .iconPhrase("Partly cloudy")
                           .temperatureValue(18.5f)
                           .temperatureUnit("C")
-                          .precipitationProbability(10)
                           .build()))
               .build();
 
@@ -171,7 +170,6 @@ class HourlyForecastProviderTest {
                           .iconPhrase("Partly cloudy")
                           .temperatureValue(18.5f)
                           .temperatureUnit("C")
-                          .precipitationProbability(10)
                           .build()))
               .build();
 
@@ -197,7 +195,6 @@ class HourlyForecastProviderTest {
       assertThat(content.text(), containsString("2026-03-19T14:00:00-08:00"));
       assertThat(content.text(), containsString("18.5°C"));
       assertThat(content.text(), containsString("Partly cloudy"));
-      assertThat(content.text(), containsString("10% precip"));
       assertThat(content.text(), containsString("More detail: https://example.com/hourly"));
     }
   }
