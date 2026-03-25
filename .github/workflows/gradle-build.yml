@@ -32,8 +32,6 @@ jobs:
       - name: Build (including tests and lint)
         run: ./gradlew build
 
-      - name: Build Docker image
-        run: ./gradlew jibDockerBuild
 
       - name: Archive built JAR
         uses: actions/upload-artifact@v4
