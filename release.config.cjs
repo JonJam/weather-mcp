@@ -1,0 +1,17 @@
+module.exports = {
+  branches: [
+    "main"
+  ],
+  plugins: [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/github",
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": $`APP_VERSION=\${nextRelease.version} ./gradlew jib -Djib.to.auth.username=${process.env.DOCKER_USERNAME} -Djib.to.auth.password=${process.env.DOCKER_PASSWORD} -Djib.to.tags=\${nextRelease.version},latest`
+      }
+    ]
+  ]
+}
+
