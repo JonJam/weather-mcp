@@ -9,7 +9,7 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        "publishCmd": $`APP_VERSION=\${nextRelease.version} ./gradlew jib -Djib.to.auth.username=${process.env.DOCKER_USERNAME} -Djib.to.auth.password=${process.env.DOCKER_PASSWORD} -Djib.to.tags=\${nextRelease.version},latest`
+        "publishCmd": `APP_VERSION=\${nextRelease.version} ./gradlew jib -Djib.to.auth.username=${process.env.DOCKER_USERNAME} -Djib.to.auth.password=${process.env.DOCKER_PASSWORD} -Djib.to.tags=\${nextRelease.version},latest`
       }
     ]
   ]
