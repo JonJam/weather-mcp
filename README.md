@@ -19,30 +19,6 @@ logging:
 
 - Run with `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
 
-## Build Docker image locally
-
-This project uses the [Jib Gradle plugin](https://github.com/GoogleContainerTools/jib) to build a Docker image.
-
-- Build and load the image into your local Docker daemon:
-
-```bash
-./gradlew jibDockerBuild
-```
-
-- Build with an explicit tag (for example, `local-dev`):
-
-```bash
-./gradlew jibDockerBuild -Djib.to.tags=local-dev
-```
-
-The default image name is `io.github.jonjam/accuweather-mcp` and it is tagged with the project version (for example, `local-snapshot`).
-
-The built image includes this OCI label:
-
-```Dockerfile
-LABEL io.modelcontextprotocol.server.name="io.github.jonjam/accuweather-mcp"
-```
-
 ## Testing
 **Note**: If you enable the Java debugger, it will produce output to standard out which will trigger errors in the stdio MCP protocol.
 
@@ -51,8 +27,8 @@ LABEL io.modelcontextprotocol.server.name="io.github.jonjam/accuweather-mcp"
 To test with [MCP Inspector]([https://modelcontextprotocol.io/docs/tools/inspector](https://modelcontextprotocol.io/docs/tools/inspector)), run the following from the root of the repo:
 
 ```bash
-npx @modelcontextprotocol/inspector   -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'   java -jar "build/libs/accuweather-mcp-local-snapshot.jar"
-````
+npx @modelcontextprotocol/inspector -e 'JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005' java -jar "build/libs/accuweather-mcp-local-snapshot.jar"
+```
 
 This was sourced from this [blog.](https://medium.com/@tsteidle/creating-an-mcp-server-with-spring-boot-setup-debugging-and-unit-testing-8edbac9da5a6)
 
@@ -82,6 +58,24 @@ Example user prompt:
 
 ```
 Use the accuweather-mcp to look up the current weather in Manchester, UK.
+```
+
+### Docker
+
+This project uses the [Jib Gradle plugin](https://github.com/GoogleContainerTools/jib) to build a Docker image.
+
+- Build and load the image into your local Docker daemon:
+
+```bash
+./gradlew jibDockerBuild
+```
+
+The default image name is `jonjam/accuweather-mcp`.
+
+To use the docker image with MCP Inspector, the command looks as follows:
+
+```bash
+npx @modelcontextprotocol/inspector docker run --rm -i --env "ACCUWEATHER_API_KEY=$ACCUWEATHER_API_KEY" jonjam/accuweather-mcp:latest
 ```
 
 ## Code style and static analysis
