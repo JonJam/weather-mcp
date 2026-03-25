@@ -35,11 +35,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
 
-      - name: Build Docker image for release
-        # semantic-release runs in a separate job, so we must build/load the image here too.
-        # The docker plugin expects `jonjam/accuweather-mcp:latest` to exist locally.
-        run: ./gradlew jibDockerBuild
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -50,4 +45,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-        run: npx --package semantic-release@25 --package @semantic-release-plus/docker@3 semantic-release
+        run: npx --package semantic-release@25 --package @semantic-release/exec semantic-release
