@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.1.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'com.google.cloud.tools.jib' version '3.5.3'
 	id 'com.diffplug.spotless' version '8.2.1'
 	id 'checkstyle'
 	id 'jacoco'
@@ -88,5 +89,31 @@ tasks.named('jacocoTestReport') {
 		xml.required = true
 		csv.required = false
 		html.required = true
+	}
+}
+
+jib {
+	from {
+		image = 'eclipse-temurin:21-jre'
+		// Support both amd64 and arm64 platforms
+		// https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md#how-do-i-specify-a-platform-in-the-manifest-list-or-oci-index-of-a-base-image
+		platforms {
+			platform {
+				architecture = 'amd64'
+				os = 'linux'
+			}
+			platform {
+				architecture = 'arm64'
+				os = 'linux'
+			}
+		}
+	}
+	to {
+		image = 'jonjam/accuweather-mcp'
+	}
+	container {
+		labels = [
+			'io.modelcontextprotocol.server.name': 'io.github.jonjam/accuweather-mcp'
+		]
 	}
 }

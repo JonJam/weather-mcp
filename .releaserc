@@ -7,9 +7,9 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/github",
     [
-      "@semantic-release/exec",
+      "@semantic-release-plus/docker",
       {
-        "publishCmd": "echo \"TODO: Publish Docker image or MCP package for this release (version ${nextRelease.version})\""
+        "name": "jonjam/accuweather-mcp"
       }
     ]
   ]

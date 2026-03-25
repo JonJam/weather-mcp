@@ -34,4 +34,6 @@ jobs:
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx --package semantic-release@25 --package @semantic-release/exec@7 semantic-release
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: npx --package semantic-release@25 --package @semantic-release-plus/docker@3 semantic-release
