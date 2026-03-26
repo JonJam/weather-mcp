@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jonjam/accuweather-mcp",
+  "title": "AccuWeather MCP",
+  "description": "MCP server providing weather information sourced from AccuWeather: current conditions, hourly forecasts and daily forecasts.",
+  "repository": {
+    "url": "https://github.com/jonjam/accuweather-mcp",
+    "source": "github"
+  },
+  "version": "0.0.0-placeholder",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "docker.io/jonjam/accuweather-mcp",
+      "version": "0.0.0-placeholder",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "AccuWeather API key",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "ACCUWEATHER_API_KEY"
+        }
+      ]
+    }
+  ]
+}

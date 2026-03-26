@@ -2,11 +2,11 @@
 
 ## Setup
 
+- Define the following environment variables in your system
 ```
 export ACCUWEATHER_API_KEY=replace-with-your-api-key
 ```
 
-- Define the following environment variables in your system
 - Define a `application-local.yaml` in `src/main/resources/application.yaml` with the following content:
 
 ```YAML
@@ -14,6 +14,11 @@ logging:
   console:
     enabled: true
 ```
+
+- If using Cursor, add the following documentation sources:
+  - [Spring AI documentation](https://docs.spring.io/spring-ai/reference/)
+  - [Wiremock documentation][[https://wiremock.org/docs/]](https://wiremock.org/docs/]) 
+  - [Lombok documentation][[https://projectlombok.org/features/]](https://projectlombok.org/features/]) 
 
 ## Run
 
@@ -78,7 +83,8 @@ To use the docker image with MCP Inspector, the command looks as follows:
 npx @modelcontextprotocol/inspector docker run --rm -i --env "ACCUWEATHER_API_KEY=$ACCUWEATHER_API_KEY" jonjam/accuweather-mcp:latest
 ```
 
-## Code style and static analysis
+## Patterns and practies
+More information about patterns and practises for this project can be found in AGENTS.md.
 
 ### Spotless
 
@@ -94,32 +100,15 @@ Static analysis and broader code-quality checks are handled by Checkstyle using 
 - `./gradlew checkstyleMain` — run Checkstyle over main sources.
 - `./gradlew checkstyleTest` — run Checkstyle over test sources.
 
-## Logging
+### MCP
 
-- **Accessing a logger**: Use Lombok's `@CommonsLog` on classes that need logging:
-  ```java
-  import lombok.extern.apachecommons.CommonsLog;
-
-  @CommonsLog
-  public class ExampleService {
-
-    public void doSomething() {
-      log.info("Starting work");
-    }
-  }
-  ```
-  Lombok generates a `private static final org.apache.commons.logging.Log log` field so you can log via `log.info(...)`, `log.warn(...)`, etc.
-
-## Documentation
-
-- Add [Spring AI documentation](https://docs.spring.io/spring-ai/reference/) as a Docs source to Cursor.
-- Add [Wiremock documentation][[https://wiremock.org/docs/]](https://wiremock.org/docs/]) as a Docs source to Cursor.
-- Add [Lombok documentation][[https://projectlombok.org/features/]](https://projectlombok.org/features/]) as a Docs source to Cursor.
-
-More information about patterns and practises for this project can be found in AGENTS.md.
-
-## MCP
-
-### Tools
+#### Tools
 
 - Ensure to handle errors (i.e. validation) according to the [specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
+
+
+## MCP Registry
+
+This server is published to the [MCP Registry](https://modelcontextprotocol.io/registry). 
+
+When using an MCP client that supports the registry (e.g. Cursor, Claude Desktop), you can add `io.github.jonjam/accuweather-mcp` from the registry and configure your AccuWeather API key as the `ACCUWEATHER_API_KEY` environment variable.
