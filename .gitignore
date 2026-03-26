@@ -45,3 +45,7 @@ application-local.yml
 
 ### Logs ###
 accuweather-mcp.log*
+
+### MCP Registry ###
+.mcpregistry_github_token
+.mcpregistry_registry_token

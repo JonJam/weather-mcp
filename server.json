@@ -11,8 +11,7 @@
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "docker.io/jonjam/accuweather-mcp",
-      "version": "0.0.0-placeholder",
+      "identifier": "docker.io/jonjam/accuweather-mcp:0.0.0-placeholder",
       "transport": {
         "type": "stdio"
       },

@@ -1,4 +1,21 @@
+
+
 # accuweather-mcp
+
+- [Setup](#setup)
+- [Run](#run)
+- [Testing](#testing)
+  - [MCP Inspector](#mcp-inspector)
+  - [AI chat (Claude, Cursor)](#ai-chat-claude-cursor)
+  - [Docker](#docker)
+- [Patterns and practices](#patterns-and-practies)
+  - [Git](#git)
+  - [Spotless](#spotless)
+  - [Checkstyle](#checkstyle)
+  - [MCP](#mcp)
+- [MCP Registry](#mcp-registry)
+- [Future improvements](#future-improvements)
+
 
 ## Setup
 
@@ -110,14 +127,12 @@ Static analysis and broader code-quality checks are handled by Checkstyle using 
 - `./gradlew checkstyleTest` — run Checkstyle over test sources.
 
 ### MCP
-
-#### Tools
-
-- Ensure to handle errors (i.e. validation) according to the [specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
-
+- **Tools** Ensure to handle errors (i.e. validation) according to the [specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
 
 ## MCP Registry
 
 This server is published to the [MCP Registry](https://modelcontextprotocol.io/registry). 
 
 When using an MCP client that supports the registry (e.g. Cursor, Claude Desktop), you can add `io.github.jonjam/accuweather-mcp` from the registry and configure your AccuWeather API key as the `ACCUWEATHER_API_KEY` environment variable.
+
+## Future improvements
