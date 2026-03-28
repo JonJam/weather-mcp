@@ -16,7 +16,7 @@ module.exports = {
       "@semantic-release/exec",
       {
         "verifyReleaseCmd": "./mcp-publisher validate",
-        "prepareCmd": `APP_VERSION=\${nextRelease.version} jq --arg v "$APP_VERSION" '.version = $v | (.packages[]?.identifier) |= sub(":[^:]+$"; ":" + $v)' server.json > server.tmp && mv server.tmp server.json`,
+        "prepareCmd": `jq --arg v "\${nextRelease.version}" '.version = $v | (.packages[]?.identifier) |= sub(":[^:]+$"; ":" + $v)' server.json > server.tmp && mv server.tmp server.json`,
         "publishCmd": "./mcp-publisher publish"
       }
     ],

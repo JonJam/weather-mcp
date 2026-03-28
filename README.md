@@ -136,3 +136,8 @@ This server is published to the [MCP Registry](https://modelcontextprotocol.io/r
 When using an MCP client that supports the registry (e.g. Cursor, Claude Desktop), you can add `io.github.jonjam/accuweather-mcp` from the registry and configure your AccuWeather API key as the `ACCUWEATHER_API_KEY` environment variable.
 
 ## Future improvements
+
+- Improve error handling in gateway classes based upon [AccuWeather status codes](https://developer.accuweather.com/documentation/http-status-codes)
+- Add in-memory caching for AccuWeather API calls that caches data according to [expires header](https://developer.accuweather.com/documentation/best-practices#use-the-expires-header)
+- Add ability to specify desired metric (i.e. Celsius or Fahrenheit) in Tools
+- End to end integration tests based on [Spring AI Examples](https://github.com/spring-projects/spring-ai-examples/tree/main/integration-testing)
